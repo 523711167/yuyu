@@ -1,0 +1,33 @@
+package com.xiaoxipeng.yuyu.pojo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import static com.xiaoxipeng.yuyu.constant.Status.UNKNOWN_ERROR;
+
+@Setter
+@Getter
+public class R<T> {
+
+    private String requestId;
+
+    private Integer code;
+
+    private String msg;
+
+    private T data;
+
+    public static <T> R<T> fromS(S<T> data) {
+        R<T> tr = new R<>();
+        tr.setCode(data.getCode());
+        tr.setMsg(data.getError());
+        tr.setData(data.getData());
+        return tr;
+    }
+
+    public static <T> R<T> fail() {
+        R<T> tr = new R<>();
+        tr.setCode(UNKNOWN_ERROR.getCode());
+        return tr;
+    }
+}

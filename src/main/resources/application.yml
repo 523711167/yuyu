@@ -5,8 +5,6 @@ spring:
   data:
     # redis config
     redis:
-      url:
       host: 127.0.0.1
-      username:
       port: 6379
       database: 1
