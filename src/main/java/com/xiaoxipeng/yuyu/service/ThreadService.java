@@ -4,10 +4,11 @@ import com.xiaoxipeng.yuyu.pojo.S;
 
 public interface ThreadService {
 
-
-    /**
-     * 测试同步移交队列，超过核心线程数任务
-     * @return
-     */
     S<Void> test();
+
+    S<String> test_1();
+
+    S<Object> test_2();
+
+    S<Integer> test_3() throws InterruptedException;
 }

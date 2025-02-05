@@ -2,7 +2,7 @@ package com.xiaoxipeng.yuyu.constant;
 
 public enum Status {
 
-    UNKNOWN_ERROR(1000, "系统异常");
+    UNKNOWN_ERROR(1000, "An error occurred");
 
     private final Integer code;
 
