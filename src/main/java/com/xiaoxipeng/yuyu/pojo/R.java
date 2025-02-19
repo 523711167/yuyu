@@ -3,6 +3,7 @@ package com.xiaoxipeng.yuyu.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.xiaoxipeng.yuyu.constant.Status.SUCCESS;
 import static com.xiaoxipeng.yuyu.constant.Status.UNKNOWN_ERROR;
 
 @Setter
@@ -22,6 +23,14 @@ public class R<T> {
         tr.setCode(data.getCode());
         tr.setMsg(data.getError());
         tr.setData(data.getData());
+        return tr;
+    }
+
+    public static <T> R<T> success() {
+        R<T> tr = new R<>();
+        tr.setCode(SUCCESS.getCode());
+        tr.setMsg(SUCCESS.getMessage());
+        tr.setData(null);
         return tr;
     }
 

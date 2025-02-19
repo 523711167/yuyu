@@ -42,7 +42,7 @@ public class ThreadController {
      *   测试volatile关键字的作用
      *   被 同步移交队列+超过最大线程丢弃任务影响，导致后续任务都是未完成状态，get一直等待。
      *   测试失败++i并不是原子操作，加上volatile关键字后也无效。
-     *   voliate关键字作用：1.静止重排序，2.线程可见性。
+     *   volatile关键字作用：1.静止重排序，2.线程可见性。
      */
     @RequestMapping("testVolatile")
     public R<Integer> testVolatile() throws InterruptedException {

@@ -13,22 +13,25 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>yuyu</name>
 	<description>yuyu</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+
 	<properties>
 		<java.version>17</java.version>
+		<revision>4.4.0</revision>
+
+		<maven.plugin.version>3.11.0</maven.plugin.version>
+		<maven.flatten.version>1.3.0</maven.flatten.version>
+
+		<captcha.version>1.6.2</captcha.version>
+		<easyexcel.version>3.3.4</easyexcel.version>
+		<poi.version>4.1.2</poi.version>
+		<mica.auto.version>3.1.3</mica.auto.version>
+
+		<!-- 推荐使用Harbor -->
+		<docker.registry.url>192.168.18.124:80</docker.registry.url>
+		<docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host>
+		<docker.plugin.version>1.2.2</docker.plugin.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,29 +74,31 @@
 	</dependencies>
 
 	<build>
+		<!-- 打包后的名称	-->
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.plugin.version}</version>
 				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<imageName>${docker.registry.url}/xiaoxipeng/${project.artifactId}:${project.version}</imageName>
+					<!--	dockerfile文件所在目录	-->
+					<dockerDirectory>${project.basedir}</dockerDirectory>
+					<!--	通过这个地址远程调用操作docker客户端的API	-->
+					<dockerHost>${docker.registry.host}</dockerHost>
+					<resources>
+						<resource>
+							<!-- 拷贝到镜像中的根目录	-->
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<registryUrl>${docker.registry.url}</registryUrl>
+					<!-- setting文件的server标签的id对应，用于身份验证	-->
+					<serverId>${docker.registry.url}</serverId>
+					<pushImage>true</pushImage>
 				</configuration>
 			</plugin>
 		</plugins>

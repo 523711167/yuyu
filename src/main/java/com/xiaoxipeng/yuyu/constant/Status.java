@@ -2,6 +2,8 @@ package com.xiaoxipeng.yuyu.constant;
 
 public enum Status {
 
+    SUCCESS(0000, "success"),
+
     UNKNOWN_ERROR(1000, "An error occurred");
 
     private final Integer code;
