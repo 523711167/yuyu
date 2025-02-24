@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.xiaoxipeng</groupId>
 	<artifactId>yuyu</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>yuyu</name>
 	<description>yuyu</description>
 
@@ -29,7 +29,7 @@
 		<!-- 推荐使用Harbor -->
 		<docker.registry.url>192.168.18.124:80</docker.registry.url>
 		<docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host>
-		<docker.plugin.version>1.2.2</docker.plugin.version>
+		<docker.plugin.version>1.4.13</docker.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -79,27 +79,34 @@
 		<plugins>
 			<plugin>
 				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>${docker.plugin.version}</version>
-				<configuration>
-					<imageName>${docker.registry.url}/xiaoxipeng/${project.artifactId}:${project.version}</imageName>
-					<!--	dockerfile文件所在目录	-->
-					<dockerDirectory>${project.basedir}</dockerDirectory>
-					<!--	通过这个地址远程调用操作docker客户端的API	-->
-					<dockerHost>${docker.registry.host}</dockerHost>
-					<resources>
-						<resource>
-							<!-- 拷贝到镜像中的根目录	-->
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
-					<registryUrl>${docker.registry.url}</registryUrl>
-					<!-- setting文件的server标签的id对应，用于身份验证	-->
-					<serverId>${docker.registry.url}</serverId>
-					<pushImage>true</pushImage>
-				</configuration>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<configuration>
+							<repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+							<tag>${project.version}</tag>
+						</configuration>
+					</execution>
+					<execution>
+						<!--						-->
+						<id>tag</id>
+						<phase>package</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+							<repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+							<tag>${project.version}</tag>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
