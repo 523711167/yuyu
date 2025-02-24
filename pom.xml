@@ -30,6 +30,8 @@
 		<docker.registry.url>192.168.18.124:80</docker.registry.url>
 		<docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host>
 		<docker.plugin.version>1.4.13</docker.plugin.version>
+
+		<maven.jar.version>3.4.2</maven.jar.version>
 	</properties>
 
 	<dependencies>
@@ -77,6 +79,20 @@
 		<!-- 打包后的名称	-->
 		<finalName>${project.name}</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.version}</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Main-Class>
+								com.xiaoxipeng.yuyu.YuyuApplication
+							</Main-Class>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
