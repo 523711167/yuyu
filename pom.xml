@@ -97,7 +97,6 @@
 							<goal>build</goal>
 						</goals>
 						<configuration>
-							<skip>true</skip>
 							<repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
 							<tag>${project.version}</tag>
 						</configuration>
