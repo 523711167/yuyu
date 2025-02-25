@@ -100,6 +100,7 @@
 							<repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
 							<tag>${project.version}</tag>
 							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+							<googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
 						</configuration>
 					</execution>
 					<execution>
