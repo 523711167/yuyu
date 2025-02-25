@@ -99,6 +99,7 @@
 						<configuration>
 							<repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
 							<tag>${project.version}</tag>
+							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 						</configuration>
 					</execution>
 					<execution>
