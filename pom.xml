@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.xiaoxipeng</groupId>
 	<artifactId>yuyu</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 
 	<name>yuyu</name>
 	<description>小试牛刀</description>
