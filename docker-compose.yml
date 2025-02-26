@@ -1,6 +1,6 @@
 services:
   yuyu:
-    image: xiaoxipeng/yuyu:0.0.1
+    image: 192.168.18.124:80/xiaoxipeng/yuyu:0.0.1
     container_name: xiaoxipeng-yuyu
     restart: always
     ports:
@@ -10,10 +10,8 @@ services:
     depends_on:
       - mysql
       - redis
-    networks:
-      - bridge
   redis:
-    image: xiaoxipeng/redis:5
+    image: 192.168.18.124:80/xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis
     restart: always
     volumes:
@@ -22,20 +20,16 @@ services:
         source: ./common/config/redis/redis.conf
         target: /path/to/redis.conf
     command:
-      - redis-server /path/to/redis.conf
+      - ./redis-server /path/to/redis.conf
     ports:
       - "6379:6379"
     cap_add:
       - ALL
-    networks:
-      - bridge
   mysql:
-    image: xiaoxipeng/mysql:8
+    image: 192.168.18.124:80/xiaoxipeng/mysql:8
     container_name: xiaoxipeng-mysql
     restart: always
     ports:
       - "3306:3306"
     cap_add:
       - ALL
-    networks:
-      - bridge
