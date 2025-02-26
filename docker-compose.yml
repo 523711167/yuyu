@@ -16,6 +16,13 @@ services:
     image: xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis
     restart: always
+    volumes:
+      - /var/redis/:/data/
+      - type: bind
+        source: ./common/config/redis/redis.conf
+        target: /path/to/redis.conf
+    command:
+      - redis-server /path/to/redis.conf
     ports:
       - "6379:6379"
     cap_add:
