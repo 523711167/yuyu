@@ -28,6 +28,8 @@ services:
     image: 192.168.18.124:80/xiaoxipeng/mysql:8
     container_name: xiaoxipeng-mysql
     restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
     ports:
       - "3306:3306"
     cap_add:
