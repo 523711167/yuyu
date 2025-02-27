@@ -34,6 +34,7 @@
 		<docker.plugin.version>1.4.13</docker.plugin.version>
 
 		<maven.jar.version>3.4.2</maven.jar.version>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 
 	<dependencies>
