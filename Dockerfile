@@ -13,6 +13,4 @@ ADD ./target/yuyu.jar ./yuyu.jar
 EXPOSE 8080
 
 # 定义容器启动时执行的命令
-ENTRYPOINT ["java", "-jar", "yuyu.jar"]
-
-CMD ["--spring.profiles.active=dev"]
+CMD ["java", "-jar", "yuyu.jar", "--spring.profiles.active=dev"]
