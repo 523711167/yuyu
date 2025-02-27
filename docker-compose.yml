@@ -28,6 +28,8 @@ services:
     image: 192.168.18.124:80/xiaoxipeng/mysql:8
     container_name: xiaoxipeng-mysql
     restart: always
+    volumes:
+      - /var/mysql:/var/lib/mysql
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     ports:
