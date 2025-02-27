@@ -1,4 +1,4 @@
-package com.xiaoxipeng.yuyu.pojo;
+package com.xiaoxipeng.yuyu.vo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +31,14 @@ public class R<T> {
         tr.setCode(SUCCESS.getCode());
         tr.setMsg(SUCCESS.getMessage());
         tr.setData(null);
+        return tr;
+    }
+
+    public static <T> R<T> success(T data) {
+        R<T> tr = new R<>();
+        tr.setCode(SUCCESS.getCode());
+        tr.setMsg(SUCCESS.getMessage());
+        tr.setData(data);
         return tr;
     }
 

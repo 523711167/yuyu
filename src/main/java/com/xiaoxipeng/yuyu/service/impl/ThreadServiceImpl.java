@@ -1,6 +1,6 @@
 package com.xiaoxipeng.yuyu.service.impl;
 
-import com.xiaoxipeng.yuyu.pojo.S;
+import com.xiaoxipeng.yuyu.vo.S;
 import com.xiaoxipeng.yuyu.service.ThreadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

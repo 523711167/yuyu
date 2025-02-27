@@ -1,6 +1,6 @@
 package com.xiaoxipeng.yuyu.controller;
 
-import com.xiaoxipeng.yuyu.pojo.R;
+import com.xiaoxipeng.yuyu.vo.R;
 import com.xiaoxipeng.yuyu.service.ThreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

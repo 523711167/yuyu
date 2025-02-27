@@ -1,4 +1,4 @@
-package com.xiaoxipeng.yuyu.pojo;
+package com.xiaoxipeng.yuyu.vo;
 
 import com.xiaoxipeng.yuyu.constant.Status;
 import lombok.Getter;

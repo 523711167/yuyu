@@ -1,6 +1,6 @@
 package com.xiaoxipeng.yuyu.service;
 
-import com.xiaoxipeng.yuyu.pojo.S;
+import com.xiaoxipeng.yuyu.vo.S;
 
 public interface ThreadService {
 

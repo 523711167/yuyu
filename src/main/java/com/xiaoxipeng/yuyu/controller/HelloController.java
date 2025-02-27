@@ -1,6 +1,6 @@
 package com.xiaoxipeng.yuyu.controller;
 
-import com.xiaoxipeng.yuyu.pojo.R;
+import com.xiaoxipeng.yuyu.vo.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

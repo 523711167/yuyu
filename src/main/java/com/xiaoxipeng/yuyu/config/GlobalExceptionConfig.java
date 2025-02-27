@@ -1,6 +1,6 @@
 package com.xiaoxipeng.yuyu.config;
 
-import com.xiaoxipeng.yuyu.pojo.R;
+import com.xiaoxipeng.yuyu.vo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
