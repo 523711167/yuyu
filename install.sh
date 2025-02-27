@@ -44,10 +44,10 @@ if [ -n "$DOCKER_COMPOSE ps -q"  ]
 fi
 echo ""
 
-h2 "[Step $item]: starting Harbor ..."
+h2 "[Step $item]: starting Xiaoxipeng ..."
 $DOCKER_COMPOSE up -d
 
-success $"----YuYu has been installed and started successfully.----"
+success $"----Xiaoxipeng has been installed and started successfully.----"
 
 
 
