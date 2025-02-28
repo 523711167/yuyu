@@ -8,7 +8,7 @@ spring:
       password: xiaoxipeng
   # mysql config
   datasource:
-    url: jdbc:mysql://192.168.18.124:3306/yuyu?serverTimezone=UTC&useSSL=false&characterEncoding=utf8
+    url: jdbc:mysql://192.168.18.124:3306/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
