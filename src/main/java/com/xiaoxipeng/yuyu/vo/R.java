@@ -45,6 +45,7 @@ public class R<T> {
     public static <T> R<T> fail() {
         R<T> tr = new R<>();
         tr.setCode(UNKNOWN_ERROR.getCode());
+        tr.setMsg(UNKNOWN_ERROR.getMessage());
         return tr;
     }
 }
