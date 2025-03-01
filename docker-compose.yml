@@ -36,3 +36,19 @@ services:
       - "3306:3306"
     cap_add:
       - ALL
+  nginx:
+    image: 192.168.18.124:80/xiaoxipeng/nginx:1.27.4
+    container_name: xiaoxipeng-nginx
+    restart: always
+    volumes:
+      - /var/nginx/:/var/log/nginx/
+      - /root/data/web/:/web/
+      - type: bind
+        source: ./common/config/nginx/default.conf
+        target: /etc/nginx/default.conf
+    ports:
+      - "8081:80"
+    cap_add:
+      - ALL
+    depends_on:
+      - yuyu
