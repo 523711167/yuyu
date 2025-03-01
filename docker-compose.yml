@@ -44,8 +44,8 @@ services:
       - /var/nginx/:/var/log/nginx/
       - /root/data/web/:/web/
       - type: bind
-        source: ./common/config/nginx/nginx.conf
-        target: /etc/nginx/conf.d/nginx.conf
+        source: ./common/config/nginx/default.conf
+        target: /etc/nginx/conf.d/default.conf
     ports:
       - "8081:80"
     cap_add:
