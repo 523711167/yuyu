@@ -52,3 +52,18 @@ services:
       - ALL
     depends_on:
       - yuyu
+  nacos:
+    image: 192.168.18.124:80/xiaoxipeng/nacos:2.4.3
+    container_name: xiaoxipeng-nacos
+    restart: always
+    volumes:
+      - /var/nacos/:/home/nacos/
+    environment:
+      - MODE=true
+      - MYSQL_SERVICE_USER=admin
+      - MYSQL_SERVICE_PASSWORD=admin123
+    ports:
+      - "8848:8848"
+      - "9848":"9848"
+    cap_add:
+      - ALL
