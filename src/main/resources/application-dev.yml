@@ -14,3 +14,18 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          my-oidc-client:
+            provider: my-oidc-provider
+            client-id: oidc-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            scope: openid,profile
+        provider:
+          my-oidc-provider:
+            issuer-uri: http://localhost:9000
