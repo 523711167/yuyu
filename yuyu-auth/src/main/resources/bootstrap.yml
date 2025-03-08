@@ -1,0 +1,11 @@
+spring:
+  application:
+    # 应用名称，用于在 Nacos 中查找配置
+    name: yuyu-auth
+  cloud:
+    nacos:
+      config:
+        # Nacos 服务器地址
+        server-addr: ${NACOS_ADDRESS:192.168.18.124:8848}
+        # 配置文件格式
+        file-extension: yaml
