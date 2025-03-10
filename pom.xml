@@ -63,6 +63,7 @@
 		<module>yuyu-auth</module>
 		<module>yuyu-api</module>
 		<module>yuyu-gateway</module>
+		<module>yuyu-config</module>
 	</modules>
 
 	<build>

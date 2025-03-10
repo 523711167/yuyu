@@ -1,27 +1,16 @@
 spring:
+  profiles:
+    active: dev
   application:
     # 应用名称，用于在 Nacos 中查找配置
     name: yuyu-gateway
   cloud:
     nacos:
-      server-addr: ${NACOS_ADDRESS:192.168.18.124:8848}
-      config:
-        namespace: ${spring.profiles.active:dev}
-        import-check:
-          enabled: false
-
-
----
-spring:
+      server-addr: ${NACOS_ADDRESS:localhost:8848}
+    config:
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+      uri: ${CONFIG_SERVER_ADDRESS:http://localhost:10000}
   config:
-    import:
-      - nacos:gateway.yml?group=gateway
-    activate:
-      on-profile: prod
----
-spring:
-  config:
-    import:
-      - nacos:gateway.yml?group=gateway
-    activate:
-      on-profile: dev
+    import: configserver:${CONFIG_SERVER_ADDRESS:http://localhost:10000}
+

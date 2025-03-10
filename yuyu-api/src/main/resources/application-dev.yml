@@ -1,21 +1,6 @@
+
+
 spring:
-  data:
-    # redis config
-    redis:
-      host: 192.168.18.124
-      port: 6379
-      database: 1
-      password: xiaoxipeng
-  # mysql config
-  datasource:
-    url: jdbc:mysql://192.168.18.124:3306/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      connection-test-query: select 1
-
-
   security:
     oauth2:
       client:

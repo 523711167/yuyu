@@ -1,11 +1,20 @@
-server:
-  port: 8080
-
 spring:
+  profiles:
+    active: dev
   application:
-    name: yuyu
+    # 应用名称，用于在 Nacos 中查找配置
+    name: yuyu-api
+  cloud:
+    nacos:
+      server-addr: ${NACOS_ADDRESS:localhost:8848}
+    config:
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+  config:
+    import: configserver:${CONFIG_SERVER_ADDRESS:http://localhost:10000}
 
-mybatis-plus:
-  global-config:
-    db-config:
-      table-prefix: tb_
+
+
+
+
+
