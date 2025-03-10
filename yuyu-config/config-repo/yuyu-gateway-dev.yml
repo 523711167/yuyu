@@ -1,7 +1,0 @@
-server:
-  port: 28888
-
-
-# 在已有配置基础上添加
-logging:
-  config: ${spring.cloud.config.uri}/logback.xml?useDefaultLabel

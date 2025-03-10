@@ -13,6 +13,10 @@ spring:
     config:
       server:
         native:
-          search-locations: file:./config-repo
+          search-locations: file:./config-repo/{application}/
           # 禁用label标签
           add-label-locations: false
+
+#logging:
+#  level:
+#    root: DEBUG

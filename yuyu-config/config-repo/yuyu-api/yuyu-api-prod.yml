@@ -22,7 +22,3 @@ mybatis-plus:
   global-config:
     db-config:
       table-prefix: tb_
-
-# 在已有配置基础上添加
-logging:
-  config: ${spring.cloud.config.uri}/logback.xml?useDefaultLabel

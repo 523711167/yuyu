@@ -60,28 +60,11 @@
         </filter>
     </appender>
 
-    <!-- 第三方库的日志级别 -->
-    <logger name="org.springframework" level="INFO" />
-    <logger name="org.hibernate" level="INFO" />
-    <logger name="org.apache" level="INFO" />
 
-    <logger name="org.springframework.security" level="trace" additivity="false">
-        <appender-ref ref="CONSOLE" />
-    </logger>
-
-    <!-- 日志输出级别，根日志 -->
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>
 
-    <!-- 生产环境下，将日志级别调整为WARN或ERROR -->
-    <springProfile name="prod">
-        <root level="WARN">
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="FILE" />
-            <appender-ref ref="ERROR_FILE" />
-        </root>
-    </springProfile>
 </configuration>
