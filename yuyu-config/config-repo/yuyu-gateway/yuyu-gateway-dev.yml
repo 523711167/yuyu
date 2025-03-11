@@ -9,8 +9,13 @@ spring:
           - id: auth
             uri: lb://yuyu-auth
             predicates:
-              - Path=/auth/**
+              - Path=/yuyu-auth/**
+            filters:
+              - StripPrefix=1
           - id: api
             uri: lb://yuyu-api
             predicates:
-              - Path=/api/**
+              - Path=/yuyu-api/**
+            filters:
+              - StripPrefix=1
+

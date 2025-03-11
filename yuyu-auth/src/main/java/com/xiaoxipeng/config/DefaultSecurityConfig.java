@@ -86,13 +86,12 @@ public class DefaultSecurityConfig {
                 .password("123")
                 .roles("USER")
                 .build();
-
         return new InMemoryUserDetailsManager(userDetails);
     }
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+        RegisteredClient yuyuClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("yuyu")
                 .clientSecret("{noop}123456")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -105,7 +104,20 @@ public class DefaultSecurityConfig {
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(oidcClient);
+        RegisteredClient otherClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("third")
+                .clientSecret("{noop}123123")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/my-oidc-client")
+                .postLogoutRedirectUri("http://127.0.0.1:8080/")
+                .scope(OidcScopes.OPENID)
+                .scope(OidcScopes.PROFILE)
+                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                .build();
+
+        return new InMemoryRegisteredClientRepository(yuyuClient, otherClient);
     }
 
     @Bean

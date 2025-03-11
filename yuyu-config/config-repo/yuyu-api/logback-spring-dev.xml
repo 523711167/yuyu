@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Logback配置文件，适用于Spring Boot应用 -->
 <configuration>
-    <!-- 定义日志文件的存储地址 -->
-    <property name="LOG_HOME" value="./logs" />
-    <!-- 定义日志文件名的模式 -->
-    <property name="LOG_NAME" value="application" />
-
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
     <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
