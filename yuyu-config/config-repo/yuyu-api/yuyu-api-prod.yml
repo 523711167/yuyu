@@ -1,5 +1,7 @@
 server:
   port: 20010
+  servlet:
+    context-path: /api
 
 spring:
   data:

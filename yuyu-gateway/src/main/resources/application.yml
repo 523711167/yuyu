@@ -15,5 +15,8 @@ spring:
     import: configserver:${CONFIG_SERVER_ADDRESS:http://localhost:10000}
 
 
+
+
+
 logging:
   config: ${CONFIG_SERVER_ADDRESS:http://localhost:10000}/log/${spring.profiles.active}/logback-spring.xml?useDefaultLabel=true&resolvePlaceholders=false

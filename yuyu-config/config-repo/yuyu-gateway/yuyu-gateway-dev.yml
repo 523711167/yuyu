@@ -1,4 +1,16 @@
 server:
   port: 28888
 
-
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: auth
+            uri: lb://yuyu-auth
+            predicates:
+              - Path=/auth/**
+          - id: api
+            uri: lb://yuyu-api
+            predicates:
+              - Path=/api/**

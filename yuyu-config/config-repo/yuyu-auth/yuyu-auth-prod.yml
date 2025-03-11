@@ -1,5 +1,7 @@
 server:
   port: 30000
+  servlet:
+    context-path: /auth
 
 # 在已有配置基础上添加
 logging:
