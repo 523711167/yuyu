@@ -17,4 +17,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    public User getUserByUsername(String username) {
+        System.out.println(username);
+        return lambdaQuery().eq(User::getUsername, username).one();
+    }
+
+    @Override
+    public void doLogin(String username, String password) {
+        System.out.println("Login被执行");
+    }
+
+    @Override
+    public Integer getNumber() {
+        System.out.println("getNumber被执行");
+        return 100;
+    }
+
+
 }
