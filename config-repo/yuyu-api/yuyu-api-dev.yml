@@ -5,10 +5,10 @@ spring:
   data:
     # redis config
     redis:
-      host: 192.168.18.124
+      host: 127.0.0.1
       port: 6379
       database: 1
-      password: xiaoxipeng
+#      password: xiaoxipeng
   # mysql config
   datasource:
     url: jdbc:mysql://192.168.18.124:3306/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8

@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.function.Supplier;
 
+/**
+ *  Repository 产出 上下文
+ */
 public interface NameRepository {
 
     NameContext loadContext(HttpServletRequest request);

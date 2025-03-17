@@ -12,6 +12,12 @@ public class DelegateNameRepository implements NameRepository {
     List<NameRepository> delegates = new ArrayList<>();
 
 
+    {
+        delegates.add(null);
+        delegates.add(null);
+        delegates.add(null);
+    }
+
     @Override
     public NameContext loadContext(HttpServletRequest request) {
         NameContext nameContext = null;

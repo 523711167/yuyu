@@ -1,6 +1,9 @@
 package com.xiaoxipeng.delegate.other;
 
-
+/**
+ * Holder 持有 Strategy get或set 上下文
+ * 上下文就是容器
+ */
 public class NameContextHolder {
 
     private static NameContextHolderStrategy strategy;
