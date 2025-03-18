@@ -41,18 +41,25 @@ public class RsaUtils {
         }
     }
 
-    public static KeyPair loadKeyPair(String privateKeyPath, String publicKeyPath, String algorithm) throws Exception {
-        log.info("----------- Load private key from {} -----------", privateKeyPath);
-        // 读取私钥
-        PrivateKey privateKey = loadPrivateKey(privateKeyPath, algorithm);
+    public static KeyPair loadKeyPair(String privateKeyPath, String publicKeyPath, String algorithm)  {
 
-        log.info("----------- Load public key from {}  -----------", publicKeyPath);
-        // 读取公钥
-        PublicKey publicKey = loadPublicKey(publicKeyPath, algorithm);
+        // 读取私钥
+        PrivateKey privateKey = null;
+        PublicKey publicKey = null;
+        try {
+            log.info("----------- Load  private  key   -----------");
+            privateKey = loadPrivateKey(privateKeyPath, algorithm);
+
+            log.info("----------- Load  public  key    -----------");
+            // 读取公钥
+            publicKey = loadPublicKey(publicKeyPath, algorithm);
+        } catch (Exception e) {
+            throw new RuntimeException("Load RSA key failed", e);
+        }
 
         // 创建KeyPair对象
         KeyPair keyPair = new KeyPair(publicKey, privateKey);
-        log.info("----------- Load RSA key success -----------");
+        log.info("----------- Load   RSA  key  success -----------");
         return keyPair;
     }
 

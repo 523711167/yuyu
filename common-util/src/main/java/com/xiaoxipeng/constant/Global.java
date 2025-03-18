@@ -1,4 +1,4 @@
-package com.xiaoxipeng.api.constant;
+package com.xiaoxipeng.constant;
 
 public class Global {
 

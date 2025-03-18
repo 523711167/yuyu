@@ -9,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -17,17 +18,19 @@ import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.context.AuthorizationServerContextHolder;
 import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
+import org.springframework.util.CollectionUtils;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.xiaoxipeng.constant.Admin.YOURSELF;
 
@@ -41,6 +44,9 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
     private DaoAuthenticationProvider daoAuthenticationProvider;
 
     private OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
+
+    private SessionRegistry sessionRegistry;
+
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -94,6 +100,9 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
             log.trace("Generated access token");
         }
 
+        OAuth2AccessToken accessToken = OAuth2Utils.accessToken(authorizationBuilder,
+                generatedAccessToken, tokenContext);
+
         // ----- Refresh token -----
         OAuth2RefreshToken refreshToken = null;
         // Do not issue refresh token to public client
@@ -119,7 +128,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         // ----- ID token -----
         OidcIdToken idToken;
         if (adminToken.getScopes().contains(OidcScopes.OPENID)) {
-            SessionInformation sessionInformation = getSessionInformation(principal);
+            SessionInformation sessionInformation = getSessionInformation(usernameAuthentication);
             if (sessionInformation != null) {
                 try {
                     // Compute (and use) hash for Session ID
@@ -180,7 +189,8 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
             log.trace("Authenticated token request");
         }
 
-        return null;
+        return new OAuth2AccessTokenAuthenticationToken(registeredClient, clientPrincipal, accessToken, refreshToken,
+                additionalParameters);
     }
 
     @Override
@@ -194,5 +204,33 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
 
     public void setTokenGenerator(OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) {
         this.tokenGenerator = tokenGenerator;
+    }
+
+    private static String createHash(String value) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] digest = md.digest(value.getBytes(StandardCharsets.US_ASCII));
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(digest);
+    }
+
+    private SessionInformation getSessionInformation(Authentication principal) {
+        SessionInformation sessionInformation = null;
+        if (this.sessionRegistry != null) {
+            List<SessionInformation> sessions = this.sessionRegistry.getAllSessions(principal.getPrincipal(), false);
+            if (!CollectionUtils.isEmpty(sessions)) {
+                sessionInformation = sessions.get(0);
+                if (sessions.size() > 1) {
+                    // Get the most recent session
+                    sessions = new ArrayList<>(sessions);
+                    sessions.sort(Comparator.comparing(SessionInformation::getLastRequest));
+                    sessionInformation = sessions.get(sessions.size() - 1);
+                }
+            }
+        }
+        return sessionInformation;
+    }
+
+
+    public void setSessionRegistry(SessionRegistry sessionRegistry) {
+        this.sessionRegistry = sessionRegistry;
     }
 }

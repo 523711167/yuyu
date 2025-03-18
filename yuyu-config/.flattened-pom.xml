@@ -34,12 +34,12 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-      <scope>test</scope>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
-      <scope>test</scope>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 </project>

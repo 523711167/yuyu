@@ -64,7 +64,8 @@
 		<module>yuyu-api</module>
 		<module>yuyu-gateway</module>
 		<module>yuyu-config</module>
-	</modules>
+        <module>common-util</module>
+    </modules>
 
 	<build>
 		<plugins>

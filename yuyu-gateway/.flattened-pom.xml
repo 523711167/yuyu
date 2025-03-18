@@ -40,8 +40,9 @@
       <artifactId>spring-cloud-config-client</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
+      <groupId>com.xiaoxipeng</groupId>
+      <artifactId>common-util</artifactId>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
   <build />

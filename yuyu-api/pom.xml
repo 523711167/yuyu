@@ -67,17 +67,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
@@ -94,6 +83,12 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.10.1</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiaoxipeng</groupId>
+            <artifactId>common-util</artifactId>
+            <version>${revision}</version>
         </dependency>
 
     </dependencies>

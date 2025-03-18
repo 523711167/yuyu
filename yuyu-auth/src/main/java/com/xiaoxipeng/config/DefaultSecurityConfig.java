@@ -16,6 +16,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -79,10 +80,11 @@ public class DefaultSecurityConfig {
         return http.build();
     }
 
-    private AdminAuthenticationProvider createAdminProvider() throws Exception {
+    private AdminAuthenticationProvider createAdminProvider()  {
         AdminAuthenticationProvider authenticationProvider = new AdminAuthenticationProvider();
         authenticationProvider.setDaoAuthenticationProvider(createAdminDaoProvider());
         authenticationProvider.setTokenGenerator(oAuth2TokenGenerator());
+        authenticationProvider.setSessionRegistry(new SessionRegistryImpl());
         return authenticationProvider;
     }
 
@@ -150,7 +152,7 @@ public class DefaultSecurityConfig {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource() throws Exception {
+    public JWKSource<SecurityContext> jwkSource()  {
         KeyPair keyPair = RsaUtils.loadKeyPair("rsa/private.pem", "rsa/public.pem", "RSA");
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
@@ -168,7 +170,7 @@ public class DefaultSecurityConfig {
 //    }
 
     @Bean
-    public JwtEncoder jwtEncoder() throws Exception {
+    public JwtEncoder jwtEncoder()  {
         return new NimbusJwtEncoder(jwkSource());
     }
 
@@ -178,7 +180,7 @@ public class DefaultSecurityConfig {
     }
 
     @Bean
-    public OAuth2TokenGenerator<? extends OAuth2Token> oAuth2TokenGenerator() throws Exception {
+    public OAuth2TokenGenerator<? extends OAuth2Token> oAuth2TokenGenerator() {
         JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder());
         OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
         OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();

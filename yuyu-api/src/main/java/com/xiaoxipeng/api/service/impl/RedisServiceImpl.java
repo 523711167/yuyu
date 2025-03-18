@@ -1,8 +1,7 @@
 package com.xiaoxipeng.api.service.impl;
 
-import com.xiaoxipeng.api.exception.YuyuException;
 import com.xiaoxipeng.api.service.IRedisService;
-import jodd.time.TimeUtil;
+import com.xiaoxipeng.exception.YuyuException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RFuture;
@@ -14,12 +13,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static com.xiaoxipeng.api.constant.Global.*;
+import static com.xiaoxipeng.constant.Global.*;
+
 
 @Component
 @Slf4j

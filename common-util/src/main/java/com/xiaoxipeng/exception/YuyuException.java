@@ -1,4 +1,4 @@
-package com.xiaoxipeng.api.exception;
+package com.xiaoxipeng.exception;
 
 public class YuyuException extends RuntimeException {
 

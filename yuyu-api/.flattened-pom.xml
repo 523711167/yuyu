@@ -55,9 +55,30 @@
       <version>3.0.4</version>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.36</version>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-spring-boot-starter</artifactId>
+      <version>3.37.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-generator</artifactId>
+      <version>3.5.10.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.xiaoxipeng</groupId>
+      <artifactId>common-util</artifactId>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
   <build>
