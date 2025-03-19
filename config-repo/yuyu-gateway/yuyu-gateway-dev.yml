@@ -18,4 +18,10 @@ spring:
               - Path=/yuyu-api/**
             filters:
               - StripPrefix=1
+          - id: anything
+            uri: lb://yuyu-api
+            predicates:
+              - Path=/**
+            filters:
+              - StripPrefix=1
 

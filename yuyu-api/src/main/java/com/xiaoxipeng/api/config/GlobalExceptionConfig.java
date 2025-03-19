@@ -1,6 +1,6 @@
 package com.xiaoxipeng.api.config;
 
-import com.xiaoxipeng.api.vo.R;
+import com.xiaoxipeng.vo.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

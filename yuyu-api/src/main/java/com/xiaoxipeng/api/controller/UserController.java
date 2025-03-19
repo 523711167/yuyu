@@ -2,7 +2,7 @@ package com.xiaoxipeng.api.controller;
 
 import com.xiaoxipeng.api.pojo.User;
 import com.xiaoxipeng.api.service.IUserService;
-import com.xiaoxipeng.api.vo.R;
+import com.xiaoxipeng.vo.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

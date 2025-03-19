@@ -1,8 +1,9 @@
-package com.xiaoxipeng.api.vo;
+package com.xiaoxipeng.vo;
 
-import com.xiaoxipeng.api.constant.Status;
+import com.xiaoxipeng.constant.Status;
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Getter
 @Setter

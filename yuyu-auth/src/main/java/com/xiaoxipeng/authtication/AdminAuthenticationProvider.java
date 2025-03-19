@@ -2,6 +2,7 @@ package com.xiaoxipeng.authtication;
 
 import com.xiaoxipeng.util.OAuth2Utils;
 import com.xiaoxipeng.util.RequestUtils;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,12 +12,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.oauth2.core.*;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AccessTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
@@ -35,6 +38,7 @@ import java.util.*;
 import static com.xiaoxipeng.constant.SysClient.ADMIN;
 
 @Slf4j
+@Setter
 public class AdminAuthenticationProvider implements AuthenticationProvider {
 
     private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
@@ -46,6 +50,8 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
     private OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
 
     private SessionRegistry sessionRegistry;
+
+    private OAuth2AuthorizationService authorizationService;
 
 
     @Override
@@ -80,7 +86,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
                 .authorizationServerContext(AuthorizationServerContextHolder.getContext())
 //                .authorization(authorization)
                 .authorizedScopes(adminToken.getScopes())
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(DefaultAuthorizationGrantTypes.ADMIN_PASSWORD)
                 .authorizationGrant(adminToken);
         // @formatter:on
 
@@ -88,7 +94,6 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         authorizationBuilder.principalName(usernameAuthentication.getName());
         authorizationBuilder.authorizedScopes(adminToken.getScopes());
         authorizationBuilder.authorizationGrantType(DefaultAuthorizationGrantTypes.ADMIN_PASSWORD);
-
 
         // ----- Access token -----
         OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
@@ -176,7 +181,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         // Invalidate the authorization code as it can only be used once
 //        authorization = OAuth2AuthenticationProviderUtils.invalidate(authorization, authorizationCode.getToken());
 
-//        this.authorizationService.save(authorization);
+        this.authorizationService.save(authorization);
 
         if (log.isTraceEnabled()) {
             log.trace("Saved authorization");
@@ -199,14 +204,6 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
     @Override
     public boolean supports(Class<?> authentication) {
         return AdminAuthenticationToken.class.isAssignableFrom(authentication);
-    }
-
-    public void setDaoAuthenticationProvider(DaoAuthenticationProvider daoAuthenticationProvider) {
-        this.daoAuthenticationProvider = daoAuthenticationProvider;
-    }
-
-    public void setTokenGenerator(OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator) {
-        this.tokenGenerator = tokenGenerator;
     }
 
     private static String createHash(String value) throws NoSuchAlgorithmException {
@@ -232,8 +229,4 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         return sessionInformation;
     }
 
-
-    public void setSessionRegistry(SessionRegistry sessionRegistry) {
-        this.sessionRegistry = sessionRegistry;
-    }
 }

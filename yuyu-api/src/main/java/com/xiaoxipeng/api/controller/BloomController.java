@@ -1,7 +1,7 @@
 package com.xiaoxipeng.api.controller;
 
 import com.xiaoxipeng.api.service.IBloomService;
-import com.xiaoxipeng.api.vo.R;
+import com.xiaoxipeng.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
