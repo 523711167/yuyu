@@ -1,6 +1,5 @@
 package com.xiaoxipeng.authtication;
 
-import com.xiaoxipeng.constant.LoginType;
 import com.xiaoxipeng.util.RequestUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
@@ -21,7 +20,7 @@ public class AdminAuthenticationConverter implements AuthenticationConverter {
 
         // grant_type (REQUIRED)
         String grantType = parameters.getFirst(OAuth2ParameterNames.GRANT_TYPE);
-        if (!LoginType.ADMIN.getLoginType().equals(grantType)) {
+        if (!DefaultAuthorizationGrantTypes.ADMIN_PASSWORD.getValue().equals(grantType)) {
             return null;
         }
 

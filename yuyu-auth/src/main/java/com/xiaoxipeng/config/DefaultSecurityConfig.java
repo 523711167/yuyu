@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.xiaoxipeng.authtication.AdminAuthenticationConverter;
 import com.xiaoxipeng.authtication.AdminAuthenticationProvider;
+import com.xiaoxipeng.authtication.DefaultAuthorizationGrantTypes;
 import com.xiaoxipeng.util.RsaUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,6 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -46,7 +46,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
-import static com.xiaoxipeng.constant.Admin.YOURSELF;
+import static com.xiaoxipeng.constant.SysClient.ADMIN;
 
 @Configuration
 @EnableWebSecurity
@@ -135,12 +135,11 @@ public class DefaultSecurityConfig {
                 .build();
 
         RegisteredClient otherClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId(YOURSELF)
+                .clientId(ADMIN)
                 .clientSecret("{noop}123123")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(DefaultAuthorizationGrantTypes.ADMIN_PASSWORD)
                 .redirectUri("http://127.0.0.1:8080/login/oauth2/code/my-oidc-client")
                 .postLogoutRedirectUri("http://127.0.0.1:8080/")
                 .scope(OidcScopes.OPENID)

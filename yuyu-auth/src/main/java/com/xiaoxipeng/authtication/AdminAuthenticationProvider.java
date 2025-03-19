@@ -32,7 +32,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-import static com.xiaoxipeng.constant.Admin.YOURSELF;
+import static com.xiaoxipeng.constant.SysClient.ADMIN;
 
 @Slf4j
 public class AdminAuthenticationProvider implements AuthenticationProvider {
@@ -66,7 +66,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
             //
         }
 
-        if (!YOURSELF.equals(registeredClient.getClientName())) {
+        if (!ADMIN.equals(registeredClient.getClientId())) {
             RequestUtils.throwError(OAuth2ErrorCodes.INVALID_REQUEST, OAuth2ParameterNames.CLIENT_ID,
                     RequestUtils.ACCESS_TOKEN_REQUEST_ERROR_URI);
         }
@@ -85,6 +85,9 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         // @formatter:on
 
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient);
+        authorizationBuilder.principalName(usernameAuthentication.getName());
+        authorizationBuilder.authorizedScopes(adminToken.getScopes());
+        authorizationBuilder.authorizationGrantType(DefaultAuthorizationGrantTypes.ADMIN_PASSWORD);
 
 
         // ----- Access token -----
@@ -168,7 +171,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
             idToken = null;
         }
 
-//        authorization = authorizationBuilder.build();
+        OAuth2Authorization authorization = authorizationBuilder.build();
 
         // Invalidate the authorization code as it can only be used once
 //        authorization = OAuth2AuthenticationProviderUtils.invalidate(authorization, authorizationCode.getToken());
