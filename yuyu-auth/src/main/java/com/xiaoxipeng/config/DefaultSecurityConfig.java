@@ -1,5 +1,6 @@
 package com.xiaoxipeng.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -12,23 +13,27 @@ import com.xiaoxipeng.authtication.DefaultAuthorizationGrantTypes;
 import com.xiaoxipeng.authtication.DefaultOAuth2TokenCustomizer;
 import com.xiaoxipeng.util.RsaUtils;
 import com.xiaoxipeng.vo.R;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.http.MediaType;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +42,9 @@ import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.endpoint.DefaultOAuth2AccessTokenResponseMapConverter;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
@@ -47,17 +54,20 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.savedrequest.NullRequestCache;
-import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.CollectionUtils;
 
+import java.io.IOException;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -66,6 +76,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static com.xiaoxipeng.constant.SysClient.ADMIN;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Configuration
 @EnableWebSecurity
@@ -90,40 +101,46 @@ public class DefaultSecurityConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
             throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        OAuth2AuthorizationServerConfigurer oauth2Server = http.getConfigurer(OAuth2AuthorizationServerConfigurer.class);
-        oauth2Server.oidc(Customizer.withDefaults());	// Enable OpenID Connect 1.0
+        OAuth2AuthorizationServerConfigurer oauth2Server =
+                http.getConfigurer(OAuth2AuthorizationServerConfigurer.class);
+
         http.exceptionHandling((exceptions) -> exceptions
                         .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                                new LoginUrlAuthenticationEntryPoint("/login/oauth2/code/**"),
+                                new AntPathRequestMatcher("/user/")
                         )
+                        .defaultAuthenticationEntryPointFor(
+                                this::jsonAuthenticationEntryPoint,
+                                new AntPathRequestMatcher("/**")
+                        )
+                        .accessDeniedHandler(this::jsonAccessDeniedHandler)
                 ).requestCache((cache) -> cache
                     .requestCache(new NullRequestCache())
                 );
-        http.with(oauth2Server, oAuth2AuthorizationServerConfigurer -> {
-            oAuth2AuthorizationServerConfigurer.tokenEndpoint(oAuth2TokenEndpointConfigurer -> {
-                oAuth2TokenEndpointConfigurer.accessTokenRequestConverter(new AdminAuthenticationConverter());
-                oAuth2TokenEndpointConfigurer.authenticationProvider(createAdminProvider());
-                oAuth2TokenEndpointConfigurer.accessTokenResponseHandler(accessTokenResponseHandler());
+
+        http.with(oauth2Server, serverConfigurer -> {
+            serverConfigurer.tokenEndpoint(tokenEndpointConfigurer -> {
+                tokenEndpointConfigurer.accessTokenRequestConverter(new AdminAuthenticationConverter());
+                tokenEndpointConfigurer.authenticationProvider(createAdminProvider());
+                tokenEndpointConfigurer.accessTokenResponseHandler(accessTokenResponseHandler());
+            });
+            // Enable OpenID Connect 1.0
+            serverConfigurer.oidc(oidcConfigurer -> {
+                oidcConfigurer.userInfoEndpoint(userInfoEndpointConfigurer -> {
+                    userInfoEndpointConfigurer.errorResponseHandler(this::jsonAuthenticationEntryPoint);
+                    userInfoEndpointConfigurer.userInfoResponseHandler(this::userInfoResponseHandler);
+                });
+            });
+        });
+        http.oauth2ResourceServer(resourceServer ->{
+            resourceServer.jwt(jwtConfigurer -> {
+                jwtConfigurer.decoder(jwtDecoder());
             });
         });
         return http.build();
     }
 
-    private AdminAuthenticationProvider createAdminProvider()  {
-        AdminAuthenticationProvider authenticationProvider = new AdminAuthenticationProvider();
-        authenticationProvider.setDaoAuthenticationProvider(createAdminDaoProvider());
-        authenticationProvider.setTokenGenerator(oAuth2TokenGenerator());
-        authenticationProvider.setSessionRegistry(new SessionRegistryImpl());
-        authenticationProvider.setAuthorizationService(authorizationService());
-        return authenticationProvider;
-    }
 
-    private DaoAuthenticationProvider createAdminDaoProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
-        return daoAuthenticationProvider;
-    }
 
     @Bean
     @Order(2)
@@ -136,7 +153,6 @@ public class DefaultSecurityConfig {
                 // Form login handles the redirect to the login page from the
                 // authorization server filter chain
                 .formLogin(Customizer.withDefaults());
-
         return http.build();
     }
 
@@ -152,7 +168,7 @@ public class DefaultSecurityConfig {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient yuyuClient = RegisteredClient.withId(UUID.randomUUID().toString())
+        RegisteredClient yuyuClient = RegisteredClient.withId("2e2697b5-64de-490d-943c-0c944ee95022")
                 .clientId("yuyu")
                 .clientSecret("{noop}123456")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
@@ -165,7 +181,7 @@ public class DefaultSecurityConfig {
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
-        RegisteredClient otherClient = RegisteredClient.withId(UUID.randomUUID().toString())
+        RegisteredClient otherClient = RegisteredClient.withId("c6b79c18-b7ef-44b8-b1b2-59152f05f133")
                 .clientId(ADMIN)
                 .clientSecret("{noop}123123")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
@@ -188,16 +204,16 @@ public class DefaultSecurityConfig {
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
                 .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
+                .keyID("e1840df9-7fcd-4ca1-aa99-7ecd0f9540f0")
                 .build();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return new ImmutableJWKSet<>(jwkSet);
     }
 
-//    @Bean
-//    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-//        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-//    }
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource());
+    }
 
     @Bean
     public JwtEncoder jwtEncoder()  {
@@ -266,5 +282,94 @@ public class DefaultSecurityConfig {
             }
 
         };
+    }
+
+    private void jsonAccessDeniedHandler(HttpServletRequest request,
+                                         HttpServletResponse response,
+                                         AccessDeniedException accessDeniedException) throws IOException {
+        response.setContentType(APPLICATION_JSON_VALUE); // 设置内容类型和字符编码
+        response.setCharacterEncoding("UTF-8");
+        try {
+            if (accessDeniedException instanceof AuthorizationDeniedException) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write(objectMapper.writeValueAsString(R.accessDenied()));
+            } else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write(objectMapper.writeValueAsString(R.accessDenied()));
+            }
+        } catch (JsonProcessingException e) {
+            log.error("Json序列化异常", e);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{}");
+        }
+    }
+
+
+    /**
+     *  认证异常返回处理
+     *      用户名密码端点，认证失败
+     *      userinfo端点，认证失败
+     */
+    private void jsonAuthenticationEntryPoint(HttpServletRequest request,
+                                              HttpServletResponse response,
+                                              AuthenticationException authException) throws IOException {
+        response.setContentType(APPLICATION_JSON_VALUE); // 设置内容类型和字符编码
+        response.setCharacterEncoding("UTF-8");
+        try {
+            // 用户名密码不正确
+            if (authException instanceof BadCredentialsException) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write(objectMapper.writeValueAsString(R.badCredentials()));
+            //匿名登录权限不满足
+            } else if (authException instanceof InsufficientAuthenticationException) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write(objectMapper.writeValueAsString(R.accessDenied()));
+            //访问userinfo端口权限不满足
+            } else if (authException instanceof OAuth2AuthenticationException) {
+                OAuth2Error error = ((OAuth2AuthenticationException) authException).getError();
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write(objectMapper.writeValueAsString(R.accessDenied()));
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write(objectMapper.writeValueAsString(R.fail()));
+            }
+        } catch (JsonProcessingException e) {
+            log.error("Json序列化异常", e);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{}");
+        }
+    }
+
+    private void userInfoResponseHandler(HttpServletRequest request,
+                                         HttpServletResponse response,
+                                         Authentication authentication) throws IOException {
+        response.setContentType(APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        try {
+            if (authentication instanceof OidcUserInfoAuthenticationToken userInfoAuthentication) {
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().write(objectMapper.writeValueAsString(R.success(userInfoAuthentication.getUserInfo().getClaims())));
+            }
+        } catch (JsonProcessingException e) {
+            log.error("Json序列化异常", e);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{}");
+        }
+    }
+
+
+    private AdminAuthenticationProvider createAdminProvider()  {
+        AdminAuthenticationProvider authenticationProvider = new AdminAuthenticationProvider();
+        authenticationProvider.setDaoAuthenticationProvider(createAdminDaoProvider());
+        authenticationProvider.setTokenGenerator(oAuth2TokenGenerator());
+        authenticationProvider.setSessionRegistry(new SessionRegistryImpl());
+        authenticationProvider.setAuthorizationService(authorizationService());
+        return authenticationProvider;
+    }
+
+    private DaoAuthenticationProvider createAdminDaoProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        return daoAuthenticationProvider;
     }
 }

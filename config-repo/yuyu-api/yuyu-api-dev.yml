@@ -5,15 +5,14 @@ spring:
   data:
     # redis config
     redis:
-      host: 127.0.0.1
+      host: ${REDIS_ADDRESS:127.0.0.1}
       port: 6379
       database: 1
-#      password: xiaoxipeng
   # mysql config
   datasource:
-    url: jdbc:mysql://192.168.18.124:3306/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
-    username: root
-    password: 123456
+    url: jdbc:mysql://${MYSQL_ADDRESS:localhost:3306}/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
+    username: user
+    password: user
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1

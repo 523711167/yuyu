@@ -1,5 +1,6 @@
 package com.xiaoxipeng.util;
 
+import com.xiaoxipeng.exception.YuyuException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
@@ -54,7 +55,7 @@ public class RsaUtils {
             // 读取公钥
             publicKey = loadPublicKey(publicKeyPath, algorithm);
         } catch (Exception e) {
-            throw new RuntimeException("Load RSA key failed", e);
+            throw new YuyuException("Load RSA key failed", e);
         }
 
         // 创建KeyPair对象

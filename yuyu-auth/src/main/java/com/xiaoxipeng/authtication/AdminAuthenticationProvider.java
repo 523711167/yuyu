@@ -4,7 +4,9 @@ import com.xiaoxipeng.util.OAuth2Utils;
 import com.xiaoxipeng.util.RequestUtils;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -33,6 +35,7 @@ import org.springframework.util.CollectionUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.util.*;
 
 import static com.xiaoxipeng.constant.SysClient.ADMIN;
@@ -70,6 +73,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         Authentication usernameAuthentication = daoAuthenticationProvider.authenticate(usernamePasswordToken);
         if (usernameAuthentication == null || !usernameAuthentication.isAuthenticated()) {
             //
+
         }
 
         if (!ADMIN.equals(registeredClient.getClientId())) {
@@ -94,6 +98,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
         authorizationBuilder.principalName(usernameAuthentication.getName());
         authorizationBuilder.authorizedScopes(adminToken.getScopes());
         authorizationBuilder.authorizationGrantType(DefaultAuthorizationGrantTypes.ADMIN_PASSWORD);
+        authorizationBuilder.attribute(Principal.class.getName(), usernameAuthentication);
 
         // ----- Access token -----
         OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();

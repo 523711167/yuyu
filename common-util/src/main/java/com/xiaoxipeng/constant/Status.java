@@ -2,7 +2,9 @@ package com.xiaoxipeng.constant;
 
 public enum Status {
 
-    SUCCESS(0000, "success"),
+    SUCCESS(200, "success"),
+
+    USER_ERROR(2000, "用户相关的错误"),
 
     UNKNOWN_ERROR(1000, "An error occurred");
 

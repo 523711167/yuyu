@@ -46,4 +46,22 @@ public class R<T> {
         tr.setMsg(Status.UNKNOWN_ERROR.getMessage());
         return tr;
     }
+
+    public static R<Void> badCredentials() {
+        R<Void> tr = new R<>();
+        tr.setCode(Status.USER_ERROR.getCode());
+        tr.setMsg("用户名密码不正确");
+        return tr;
+    }
+
+    public static  R<Void> accessDenied() {
+        return accessDenied("未授权");
+    }
+
+    public static R<Void> accessDenied(String msg) {
+        R<Void> tr = new R<>();
+        tr.setCode(Status.USER_ERROR.getCode());
+        tr.setMsg(msg);
+        return tr;
+    }
 }
