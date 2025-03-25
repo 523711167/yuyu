@@ -89,11 +89,17 @@ public class DefaultSecurityConfig {
 
     private final DefaultOAuth2TokenCustomizer defaultOAuth2TokenCustomizer;
 
+    private final UserDetailsService defaultUserDetailsService;
+
     @Autowired
-    public DefaultSecurityConfig(ObjectMapper objectMapper, JdbcTemplate jdbcTemplate, DefaultOAuth2TokenCustomizer defaultOAuth2TokenCustomizer) {
+    public DefaultSecurityConfig(ObjectMapper objectMapper,
+                                 JdbcTemplate jdbcTemplate,
+                                 DefaultOAuth2TokenCustomizer defaultOAuth2TokenCustomizer,
+                                 UserDetailsService defaultUserDetailsService) {
         this.objectMapper = objectMapper;
         this.jdbcTemplate = jdbcTemplate;
         this.defaultOAuth2TokenCustomizer = defaultOAuth2TokenCustomizer;
+        this.defaultUserDetailsService = defaultUserDetailsService;
     }
 
     @Bean
@@ -156,15 +162,6 @@ public class DefaultSecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("123")
-                .password("123")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(userDetails);
-    }
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
@@ -369,7 +366,7 @@ public class DefaultSecurityConfig {
 
     private DaoAuthenticationProvider createAdminDaoProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
+        daoAuthenticationProvider.setUserDetailsService(defaultUserDetailsService);
         return daoAuthenticationProvider;
     }
 }

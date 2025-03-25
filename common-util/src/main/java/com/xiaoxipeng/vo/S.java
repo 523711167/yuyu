@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class S<T> {
 
-
     private Boolean isError;
 
     private String error;

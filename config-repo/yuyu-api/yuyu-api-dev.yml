@@ -18,8 +18,7 @@ spring:
       connection-test-query: select 1
 
 
-mybatis-plus:
-  global-config:
-    db-config:
-      table-prefix: tb_
+#mybatis-plus:
+#  global-config:
+
 

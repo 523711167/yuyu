@@ -2,9 +2,6 @@ package com.xiaoxipeng.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -17,7 +14,6 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@ToString
 public class User extends Base {
 
     /**
@@ -48,12 +44,12 @@ public class User extends Base {
     /**
      * 性别: 0-女, 1-男, 2-其他
      */
-    private Boolean gender;
+    private Integer gender;
 
     /**
      * 出生日期
      */
-    private LocalDate birthDate;
+    private LocalDateTime birthDate;
 
     /**
      * 头像URL
@@ -68,7 +64,7 @@ public class User extends Base {
     /**
      * 状态: 0-禁用, 1-启用
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 最后登录时间
@@ -83,25 +79,7 @@ public class User extends Base {
     /**
      * 用户类型: 0-普通用户, 1-管理员, 2-其他
      */
-    private Boolean userType;
+    private Integer userType;
 
-    /**
-     * 创建人
-     */
-    private String createdBy;
 
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createdTime;
-
-    /**
-     * 更新人
-     */
-    private String updatedBy;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updatedTime;
 }

@@ -14,11 +14,23 @@ public class Base {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private String creater;
+    /**
+     * 创建人
+     */
+    private String createdBy;
 
-    private LocalDateTime createTime;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdTime;
 
-    private String updator;
+    /**
+     * 更新人
+     */
+    private String updatedBy;
 
-    private LocalDateTime updateTime;
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updatedTime;
 }

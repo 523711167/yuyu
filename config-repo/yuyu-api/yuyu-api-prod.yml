@@ -21,5 +21,4 @@ spring:
 
 mybatis-plus:
   global-config:
-    db-config:
-      table-prefix: tb_
+
