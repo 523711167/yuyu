@@ -8,32 +8,32 @@
     <version>0.0.2</version>
   </parent>
   <groupId>com.xiaoxipeng</groupId>
-  <artifactId>common-util</artifactId>
+  <artifactId>yuyu-service-api</artifactId>
   <version>0.0.2</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <description>yuyu 微服务API集合</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
+  <modules>
+    <module>yuyu-user-api</module>
+  </modules>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.17.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-annotation</artifactId>
-      <scope>provided</scope>
+      <groupId>com.xiaoxipeng</groupId>
+      <artifactId>common-util</artifactId>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
   <build>

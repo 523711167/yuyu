@@ -1,19 +1,17 @@
 package com.xiaoxipeng.yuyu.myabitsgenerate;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.xiaoxipeng.api.pojo.Base;
 
-import java.nio.file.Paths;
 
 public class Generate {
 
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://localhost:3306:3306/yuyu?serverTimezone=UTC&useSSL=false&characterEncoding=utf8",
+        FastAutoGenerator.create("jdbc:mysql://localhost:3306/yuyu?serverTimezone=UTC&useSSL=false&characterEncoding=utf8",
                         "user",
                         "user")
                 .globalConfig(builder -> builder
                         .author("xiaoxipeng")
-                        .outputDir(Paths.get(System.getProperty("user.dir")) + "/src/main/java")
+                        .outputDir("/Users/xixipeng/IdeaProjects/yuyu/yuyu-api/src/main/java/com/xiaoxipeng/api/")
                         .commentDate("yyyy-MM-dd")
                 )
                 .packageConfig(builder -> builder

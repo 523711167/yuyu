@@ -1,21 +1,17 @@
 package com.xiaoxipeng.api.service;
 
-import com.xiaoxipeng.api.pojo.User;
+
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiaoxipeng.entity.User;
 
 /**
  * <p>
- *  服务类
+ * 用户信息表 服务类
  * </p>
  *
  * @author xiaoxipeng
- * @since 2025-02-27
+ * @since 2025-03-25
  */
 public interface IUserService extends IService<User> {
 
-    User getUserByUsername(String username);
-
-    void doLogin(String username, String password);
-
-    Integer getNumber();
 }

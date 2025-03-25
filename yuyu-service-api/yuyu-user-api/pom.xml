@@ -12,4 +12,11 @@
     <packaging>jar</packaging>
     <description>用户相关API调用</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.xiaoxipeng</groupId>
+            <artifactId>common-util</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>

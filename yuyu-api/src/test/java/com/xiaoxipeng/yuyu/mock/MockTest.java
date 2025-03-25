@@ -1,8 +1,6 @@
 package com.xiaoxipeng.yuyu.mock;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.xiaoxipeng.api.pojo.Base;
-import com.xiaoxipeng.api.pojo.User;
 import com.xiaoxipeng.api.service.IUserService;
 import com.xiaoxipeng.api.service.impl.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
