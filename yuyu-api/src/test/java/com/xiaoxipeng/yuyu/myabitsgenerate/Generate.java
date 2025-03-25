@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 public class Generate {
 
     public static void main(String[] args) {
-        FastAutoGenerator.create("jdbc:mysql://192.168.18.124:3306/yuyu?serverTimezone=UTC&useSSL=false&characterEncoding=utf8",
-                        "root",
-                        "123456")
+        FastAutoGenerator.create("jdbc:mysql://localhost:3306:3306/yuyu?serverTimezone=UTC&useSSL=false&characterEncoding=utf8",
+                        "user",
+                        "user")
                 .globalConfig(builder -> builder
                         .author("xiaoxipeng")
                         .outputDir(Paths.get(System.getProperty("user.dir")) + "/src/main/java")
@@ -25,8 +25,7 @@ public class Generate {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addTablePrefix("tb_")
-                        .addInclude("tb_user")
+                        .addInclude("user")
                         .entityBuilder()
                         .enableLombok()
                         .disableSerialVersionUID()
