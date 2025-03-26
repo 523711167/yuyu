@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>yuyu-api</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -67,7 +68,19 @@
 
         <dependency>
             <groupId>com.xiaoxipeng</groupId>
+            <artifactId>yuyu-spring-boot-starter</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiaoxipeng</groupId>
             <artifactId>yuyu-user-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiaoxipeng</groupId>
+            <artifactId>common-util</artifactId>
             <version>${revision}</version>
         </dependency>
 
@@ -97,16 +110,12 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.xiaoxipeng</groupId>
-            <artifactId>common-util</artifactId>
-            <version>${revision}</version>
-        </dependency>
+
 
     </dependencies>
 
     <build>
-        <!-- 打包后的名称	-->
+        <!-- 打包后的名称 默认是 ${project.artifactId}-${project.version}.jar	-->
         <finalName>${project.name}</finalName>
         <plugins>
 <!--            <plugin>-->

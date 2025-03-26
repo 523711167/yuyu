@@ -9,10 +9,8 @@
     </parent>
 
     <artifactId>yuyu-gateway</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-
-    <name>yuyu-gateway</name>
-    <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>

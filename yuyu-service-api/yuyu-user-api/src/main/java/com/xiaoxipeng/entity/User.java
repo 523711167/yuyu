@@ -2,6 +2,8 @@ package com.xiaoxipeng.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -49,7 +51,7 @@ public class User extends Base {
     /**
      * 出生日期
      */
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     /**
      * 头像URL

@@ -4,6 +4,7 @@ import com.xiaoxipeng.entity.Base;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class UserVo extends Base {
     /**
      * 出生日期
      */
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     /**
      * 头像URL

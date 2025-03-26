@@ -10,6 +10,7 @@
   <groupId>com.xiaoxipeng</groupId>
   <artifactId>yuyu-api</artifactId>
   <version>0.0.2</version>
+  <name>${project.artifactId}</name>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -58,7 +59,17 @@
     </dependency>
     <dependency>
       <groupId>com.xiaoxipeng</groupId>
+      <artifactId>yuyu-spring-boot-starter</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.xiaoxipeng</groupId>
       <artifactId>yuyu-user-api</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.xiaoxipeng</groupId>
+      <artifactId>common-util</artifactId>
       <version>${revision}</version>
     </dependency>
     <dependency>
@@ -82,11 +93,6 @@
       <artifactId>velocity-engine-core</artifactId>
       <version>2.3</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.xiaoxipeng</groupId>
-      <artifactId>common-util</artifactId>
-      <version>${revision}</version>
     </dependency>
   </dependencies>
   <build>

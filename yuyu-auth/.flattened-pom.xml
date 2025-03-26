@@ -10,8 +10,7 @@
   <groupId>com.xiaoxipeng</groupId>
   <artifactId>yuyu-auth</artifactId>
   <version>0.0.2</version>
-  <name>yuyu-auth</name>
-  <url>http://maven.apache.org</url>
+  <name>${project.artifactId}</name>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>

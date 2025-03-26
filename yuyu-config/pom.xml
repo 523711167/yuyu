@@ -8,11 +8,8 @@
     </parent>
 
     <artifactId>yuyu-config</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-
-    <name>yuyu-config</name>
-    <url>http://maven.apache.org</url>
-
 
     <dependencies>
 

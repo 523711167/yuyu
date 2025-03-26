@@ -73,6 +73,7 @@
 		<module>yuyu-config</module>
         <module>common-util</module>
         <module>yuyu-service-api</module>
+        <module>yuyu-spring-boot-starter</module>
     </modules>
 
 	<build>

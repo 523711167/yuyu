@@ -8,12 +8,9 @@
         <version>${revision}</version>
     </parent>
 
-
     <artifactId>yuyu-auth</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-
-    <name>yuyu-auth</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,6 +46,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xiaoxipeng</groupId>
+            <artifactId>yuyu-spring-boot-starter</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
