@@ -1,11 +1,16 @@
 package com.xiaoxipeng.api.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiaoxipeng.api.mapper.UserMapper;
 import com.xiaoxipeng.api.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xiaoxipeng.dto.UserPageDto;
 import com.xiaoxipeng.entity.User;
+import com.xiaoxipeng.vo.PageVo;
 import com.xiaoxipeng.vo.S;
+import com.xiaoxipeng.vo.UserPageVo;
 import com.xiaoxipeng.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -32,5 +37,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(user, userVo);
         return S.success(userVo);
+    }
+
+    @Override
+    public S<PageVo<UserPageVo>> listPage(UserPageDto userPageDto) {
+        Page<UserPageVo> page = new Page<>();
+        page.setCurrent(userPageDto.getCurrent());
+        page.setSize(userPageDto.getSize());
+        IPage<UserPageVo> pageVo = this.baseMapper.selectPageVo(userPageDto, page);
+
+        PageVo<UserPageVo> data = PageVo.<UserPageVo>builder()
+                .pages(pageVo.getPages())
+                .current(pageVo.getCurrent())
+                .size(pageVo.getSize())
+                .total(pageVo.getTotal())
+                .data(pageVo.getRecords()).build();
+
+        return S.success(data);
     }
 }

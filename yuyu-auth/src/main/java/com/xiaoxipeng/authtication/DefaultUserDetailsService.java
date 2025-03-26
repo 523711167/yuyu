@@ -1,11 +1,9 @@
 package com.xiaoxipeng.authtication;
 
 import com.xiaoxipeng.feign.UserClient;
-import com.xiaoxipeng.vo.R;
 import com.xiaoxipeng.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +27,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserVo user = userClient.getUserByUsername(username).getData();
         if (user == null) {
-            throw new BadCredentialsException("用户名密码不存在");
+            throw new UsernameNotFoundException("用户名密码不存在");
         }
 
         UserDetails detail = User.withUsername(user.getUsername())

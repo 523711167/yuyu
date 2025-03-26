@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoxipeng.api.mapper.UserMapper">
+
+    <select id="selectPageVo" resultType="com.xiaoxipeng.vo.UserPageVo">
+        SELECT T.ID,
+               USERNAME,
+               EMAIL,
+               PHONE,
+               REAL_NAME,
+               GENDER,
+               BIRTH_DATE,
+               AVATAR,
+               ADDRESS,
+               STATUS,
+               LAST_LOGIN_TIME,
+               LAST_LOGIN_IP,
+               USER_TYPE,
+               CREATED_BY,
+               CREATED_TIME,
+               UPDATED_BY,
+               UPDATED_TIME
+        FROM USER T where 1 = 1
+        <if test="userPageDto.username != null and userPageDto.username != ''">
+            AND username = #{userPageDto.username}
+        </if>
+        <if test="userPageDto.phone != null and userPageDto.phone != ''">
+            AND phone = #{userPageDto.phone}
+        </if>
+        <if test="userPageDto.address != null and userPageDto.address != ''">
+            AND address LIKE CONCAT('%', #{userPageDto.address}, '%')
+        </if>
+    </select>
+</mapper>

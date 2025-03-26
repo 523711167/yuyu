@@ -327,6 +327,7 @@ public class DefaultSecurityConfig {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write(objectMapper.writeValueAsString(R.accessDenied()));
             } else {
+                log.error("认证发生异常 ===> ", authException);
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write(objectMapper.writeValueAsString(R.fail()));
             }

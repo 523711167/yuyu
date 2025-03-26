@@ -1,7 +1,6 @@
 server:
   port: 20000
 
-
 spring:
   datasource:
     url: jdbc:mysql://${MYSQL_ADDRESS:localhost:3306}/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8

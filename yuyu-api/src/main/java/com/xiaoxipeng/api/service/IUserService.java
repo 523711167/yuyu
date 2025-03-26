@@ -2,8 +2,11 @@ package com.xiaoxipeng.api.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xiaoxipeng.dto.UserPageDto;
 import com.xiaoxipeng.entity.User;
+import com.xiaoxipeng.vo.PageVo;
 import com.xiaoxipeng.vo.S;
+import com.xiaoxipeng.vo.UserPageVo;
 import com.xiaoxipeng.vo.UserVo;
 
 /**
@@ -17,5 +20,7 @@ import com.xiaoxipeng.vo.UserVo;
 public interface IUserService extends IService<User> {
 
     S<UserVo> getUserByUsername(String username);
+
+    S<PageVo<UserPageVo>> listPage(UserPageDto userPageDto);
 
 }
