@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static com.xiaoxipeng.constant.Global.*;
+import static com.xiaoxipeng.auth.constant.Global.*;
 
 
 @Component

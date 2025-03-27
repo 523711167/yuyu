@@ -1,6 +1,6 @@
 package com.xiaoxipeng.vo;
 
-import com.xiaoxipeng.constant.Status;
+import com.xiaoxipeng.auth.constant.Status;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -3,19 +3,19 @@ package com.xiaoxipeng.api.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xiaoxipeng.api.mapper.UserMapper;
 import com.xiaoxipeng.api.service.IUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xiaoxipeng.dto.UserPageDto;
-import com.xiaoxipeng.entity.User;
+import com.xiaoxipeng.user.dto.UserPageDto;
+import com.xiaoxipeng.user.entity.User;
+import com.xiaoxipeng.user.vo.UserPageVo;
+import com.xiaoxipeng.user.vo.UserVo;
 import com.xiaoxipeng.vo.PageVo;
 import com.xiaoxipeng.vo.S;
-import com.xiaoxipeng.vo.UserPageVo;
-import com.xiaoxipeng.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import static com.xiaoxipeng.constant.Status.USER_ERROR;
+import static com.xiaoxipeng.auth.constant.Status.USER_ERROR;
 
 /**
  * <p>

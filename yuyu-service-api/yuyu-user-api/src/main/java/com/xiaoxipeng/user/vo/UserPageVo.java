@@ -1,4 +1,4 @@
-package com.xiaoxipeng.vo;
+package com.xiaoxipeng.user.vo;
 
 import com.xiaoxipeng.entity.Base;
 import lombok.Getter;
@@ -10,17 +10,12 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UserVo extends Base {
+public class UserPageVo extends Base {
 
     /**
      * 用户名
      */
     private String username;
-
-    /**
-     * 密码(加密存储)
-     */
-    private String password;
 
     /**
      * 电子邮箱

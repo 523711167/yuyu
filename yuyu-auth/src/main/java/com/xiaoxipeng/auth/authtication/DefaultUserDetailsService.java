@@ -1,7 +1,7 @@
 package com.xiaoxipeng.authtication;
 
-import com.xiaoxipeng.feign.UserClient;
-import com.xiaoxipeng.vo.UserVo;
+import com.xiaoxipeng.user.feign.UserClient;
+import com.xiaoxipeng.user.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;

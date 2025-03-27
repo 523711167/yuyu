@@ -1,11 +1,9 @@
 package com.xiaoxipeng.yuyu.mock;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xiaoxipeng.api.service.IUserService;
 import com.xiaoxipeng.api.service.impl.UserServiceImpl;
-import com.xiaoxipeng.entity.User;
+import com.xiaoxipeng.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;

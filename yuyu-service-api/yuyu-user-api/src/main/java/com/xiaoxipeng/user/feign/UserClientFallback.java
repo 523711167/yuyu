@@ -1,8 +1,8 @@
-package com.xiaoxipeng.feign;
+package com.xiaoxipeng.user.feign;
 
 
 import com.xiaoxipeng.vo.R;
-import com.xiaoxipeng.vo.UserVo;
+import com.xiaoxipeng.user.vo.UserVo;
 import org.springframework.stereotype.Component;
 
 /**

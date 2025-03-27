@@ -2,12 +2,12 @@ package com.xiaoxipeng.api.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xiaoxipeng.dto.UserPageDto;
-import com.xiaoxipeng.entity.User;
+import com.xiaoxipeng.user.dto.UserPageDto;
+import com.xiaoxipeng.user.entity.User;
+import com.xiaoxipeng.user.vo.UserPageVo;
+import com.xiaoxipeng.user.vo.UserVo;
 import com.xiaoxipeng.vo.PageVo;
 import com.xiaoxipeng.vo.S;
-import com.xiaoxipeng.vo.UserPageVo;
-import com.xiaoxipeng.vo.UserVo;
 
 /**
  * <p>

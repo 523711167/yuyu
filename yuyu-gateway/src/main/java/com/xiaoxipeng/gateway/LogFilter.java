@@ -1,4 +1,4 @@
-package com.xiaoxipeng.filter;
+package com.xiaoxipeng.gateway.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

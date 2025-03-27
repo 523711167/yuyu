@@ -1,15 +1,16 @@
 package com.xiaoxipeng.api.controller;
 
 import com.xiaoxipeng.api.service.IUserService;
-import com.xiaoxipeng.dto.UserPageDto;
+import com.xiaoxipeng.user.dto.UserPageDto;
+import com.xiaoxipeng.user.vo.UserPageVo;
+import com.xiaoxipeng.user.vo.UserVo;
 import com.xiaoxipeng.vo.PageVo;
 import com.xiaoxipeng.vo.R;
-import com.xiaoxipeng.vo.UserPageVo;
-import com.xiaoxipeng.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.xiaoxipeng.feign.UserClient.USER_API_PREFIX;
+import static com.xiaoxipeng.user.feign.UserClient.USER_API_PREFIX;
+
 
 /**
  * <p>

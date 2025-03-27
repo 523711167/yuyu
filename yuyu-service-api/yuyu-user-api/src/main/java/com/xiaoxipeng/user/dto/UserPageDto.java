@@ -1,4 +1,4 @@
-package com.xiaoxipeng.dto;
+package com.xiaoxipeng.user.dto;
 
 
 import lombok.Getter;
