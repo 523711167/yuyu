@@ -1,6 +1,6 @@
 package com.xiaoxipeng.api.controller;
 
-import com.xiaoxipeng.vo.R;
+import com.xiaoxipeng.common.vo.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

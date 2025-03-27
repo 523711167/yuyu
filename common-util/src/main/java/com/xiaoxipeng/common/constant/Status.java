@@ -1,4 +1,4 @@
-package com.xiaoxipeng.constant;
+package com.xiaoxipeng.common.constant;
 
 public enum Status {
 

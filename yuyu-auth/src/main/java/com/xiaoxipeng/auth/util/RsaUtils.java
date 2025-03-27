@@ -1,6 +1,6 @@
 package com.xiaoxipeng.util;
 
-import com.xiaoxipeng.exception.YuyuException;
+import com.xiaoxipeng.common.exception.YuyuException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;

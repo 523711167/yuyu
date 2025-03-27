@@ -1,7 +1,7 @@
 package com.xiaoxipeng.api.service.impl;
 
 import com.xiaoxipeng.api.service.IRedisService;
-import com.xiaoxipeng.exception.YuyuException;
+import com.xiaoxipeng.common.exception.YuyuException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RFuture;

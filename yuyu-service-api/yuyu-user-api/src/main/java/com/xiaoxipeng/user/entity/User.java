@@ -1,6 +1,6 @@
 package com.xiaoxipeng.user.entity;
 
-import com.xiaoxipeng.entity.Base;
+import com.xiaoxipeng.common.entity.Base;
 import lombok.Getter;
 import lombok.Setter;
 

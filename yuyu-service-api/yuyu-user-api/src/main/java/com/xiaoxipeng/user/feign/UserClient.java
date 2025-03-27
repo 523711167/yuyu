@@ -1,8 +1,8 @@
 package com.xiaoxipeng.user.feign;
 
 
-import com.xiaoxipeng.constant.AppConstant;
-import com.xiaoxipeng.vo.R;
+import com.xiaoxipeng.common.constant.AppConstant;
+import com.xiaoxipeng.common.vo.R;
 import com.xiaoxipeng.user.vo.UserVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

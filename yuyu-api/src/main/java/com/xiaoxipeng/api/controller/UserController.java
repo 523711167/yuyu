@@ -4,8 +4,8 @@ import com.xiaoxipeng.api.service.IUserService;
 import com.xiaoxipeng.user.dto.UserPageDto;
 import com.xiaoxipeng.user.vo.UserPageVo;
 import com.xiaoxipeng.user.vo.UserVo;
-import com.xiaoxipeng.vo.PageVo;
-import com.xiaoxipeng.vo.R;
+import com.xiaoxipeng.common.vo.PageVo;
+import com.xiaoxipeng.common.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,7 @@
 package com.xiaoxipeng.api.service;
 
 
-import com.xiaoxipeng.vo.S;
+import com.xiaoxipeng.common.vo.S;
 
 public interface ThreadService {
 

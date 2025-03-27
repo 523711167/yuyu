@@ -10,8 +10,8 @@ import com.xiaoxipeng.user.dto.UserPageDto;
 import com.xiaoxipeng.user.entity.User;
 import com.xiaoxipeng.user.vo.UserPageVo;
 import com.xiaoxipeng.user.vo.UserVo;
-import com.xiaoxipeng.vo.PageVo;
-import com.xiaoxipeng.vo.S;
+import com.xiaoxipeng.common.vo.PageVo;
+import com.xiaoxipeng.common.vo.S;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

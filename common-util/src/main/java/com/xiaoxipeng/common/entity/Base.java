@@ -1,4 +1,4 @@
-package com.xiaoxipeng.entity;
+package com.xiaoxipeng.common.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

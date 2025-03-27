@@ -1,7 +1,7 @@
 package com.xiaoxipeng.yuyu.myabitsgenerate;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
-import com.xiaoxipeng.entity.Base;
+import com.xiaoxipeng.common.entity.Base;
 
 
 public class Generate {

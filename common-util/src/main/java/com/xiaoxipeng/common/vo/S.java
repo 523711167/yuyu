@@ -1,4 +1,4 @@
-package com.xiaoxipeng.vo;
+package com.xiaoxipeng.common.vo;
 
 import com.xiaoxipeng.auth.constant.Status;
 import lombok.Getter;
