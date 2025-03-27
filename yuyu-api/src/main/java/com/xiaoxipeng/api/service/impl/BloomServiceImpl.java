@@ -7,7 +7,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.xiaoxipeng.auth.constant.Global.MY_BLOOM_FILTER;
+import static com.xiaoxipeng.common.constant.Global.MY_BLOOM_FILTER;
 
 
 @Component

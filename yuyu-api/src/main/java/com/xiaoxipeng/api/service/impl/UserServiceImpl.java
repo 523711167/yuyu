@@ -15,7 +15,7 @@ import com.xiaoxipeng.common.vo.S;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import static com.xiaoxipeng.auth.constant.Status.USER_ERROR;
+import static com.xiaoxipeng.common.constant.Status.USER_ERROR;
 
 /**
  * <p>
