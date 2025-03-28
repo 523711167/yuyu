@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+import java.util.Arrays;
+import java.util.List;
+
 @SpringBootApplication
 @EnableDiscoveryClient //核心注解
 @MapperScan("com.xiaoxipeng.api.mapper")

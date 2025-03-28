@@ -1,4 +1,4 @@
-package com.xiaoxipeng.config;
+package com.xiaoxipeng.auth.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,11 +7,11 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.xiaoxipeng.authtication.AdminAuthenticationConverter;
-import com.xiaoxipeng.authtication.AdminAuthenticationProvider;
-import com.xiaoxipeng.authtication.DefaultAuthorizationGrantTypes;
-import com.xiaoxipeng.authtication.DefaultOAuth2TokenCustomizer;
-import com.xiaoxipeng.util.RsaUtils;
+import com.xiaoxipeng.auth.authtication.AdminAuthenticationConverter;
+import com.xiaoxipeng.auth.authtication.AdminAuthenticationProvider;
+import com.xiaoxipeng.auth.authtication.DefaultAuthorizationGrantTypes;
+import com.xiaoxipeng.auth.authtication.DefaultOAuth2TokenCustomizer;
+import com.xiaoxipeng.auth.util.RsaUtils;
 import com.xiaoxipeng.common.vo.R;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -68,7 +68,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
-import static com.xiaoxipeng.constant.SysClient.ADMIN;
+import static com.xiaoxipeng.auth.constant.SysClient.ADMIN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Configuration
@@ -136,6 +136,8 @@ public class DefaultSecurityConfig {
                 jwtConfigurer.decoder(jwtDecoder());
             });
         });
+
+        http.csrf((csrf) -> csrf.disable());
         return http.build();
     }
 

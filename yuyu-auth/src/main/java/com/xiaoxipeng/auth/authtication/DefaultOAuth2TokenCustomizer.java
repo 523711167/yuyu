@@ -1,4 +1,4 @@
-package com.xiaoxipeng.authtication;
+package com.xiaoxipeng.auth.authtication;
 
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;

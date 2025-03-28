@@ -1,4 +1,4 @@
-package com.xiaoxipeng.config;
+package com.xiaoxipeng.auth.config;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+import static com.xiaoxipeng.common.constant.AppConstant.SCAN_PACKAGE;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages = {SCAN_PACKAGE})
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {SCAN_PACKAGE})
 public class AuthApplication
 {
     public static void main(String[] args) {

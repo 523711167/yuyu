@@ -1,4 +1,4 @@
-package com.xiaoxipeng.util;
+package com.xiaoxipeng.auth.util;
 
 import com.xiaoxipeng.common.exception.YuyuException;
 import lombok.extern.slf4j.Slf4j;

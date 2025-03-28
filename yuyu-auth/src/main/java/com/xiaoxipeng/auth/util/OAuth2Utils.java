@@ -1,4 +1,4 @@
-package com.xiaoxipeng.util;
+package com.xiaoxipeng.auth.util;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.*;

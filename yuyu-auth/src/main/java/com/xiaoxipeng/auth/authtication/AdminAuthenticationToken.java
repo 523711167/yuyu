@@ -1,4 +1,4 @@
-package com.xiaoxipeng.authtication;
+package com.xiaoxipeng.auth.authtication;
 
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

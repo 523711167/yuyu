@@ -27,7 +27,7 @@
     </logger>
 
     <!-- 日志输出级别，根日志 -->
-    <root level="INFO">
+    <root level="info">
         <appender-ref ref="CONSOLE" />
     </root>
 

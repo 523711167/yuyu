@@ -1,12 +1,10 @@
-package com.xiaoxipeng.authtication;
+package com.xiaoxipeng.auth.authtication;
 
-import com.xiaoxipeng.util.OAuth2Utils;
-import com.xiaoxipeng.util.RequestUtils;
+import com.xiaoxipeng.auth.util.OAuth2Utils;
+import com.xiaoxipeng.auth.util.RequestUtils;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -14,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.oauth2.core.*;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -38,7 +35,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.*;
 
-import static com.xiaoxipeng.constant.SysClient.ADMIN;
+import static com.xiaoxipeng.auth.constant.SysClient.ADMIN;
+
 
 @Slf4j
 @Setter

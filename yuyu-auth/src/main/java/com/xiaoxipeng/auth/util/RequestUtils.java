@@ -1,4 +1,4 @@
-package com.xiaoxipeng.util;
+package com.xiaoxipeng.auth.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

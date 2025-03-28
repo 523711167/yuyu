@@ -1,4 +1,4 @@
-package com.xiaoxipeng.constant;
+package com.xiaoxipeng.auth.constant;
 
 public class SysClient {
 

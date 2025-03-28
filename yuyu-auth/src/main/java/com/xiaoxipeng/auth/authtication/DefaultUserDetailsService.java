@@ -1,4 +1,4 @@
-package com.xiaoxipeng.authtication;
+package com.xiaoxipeng.auth.authtication;
 
 import com.xiaoxipeng.user.feign.UserClient;
 import com.xiaoxipeng.user.vo.UserVo;

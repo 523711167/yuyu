@@ -46,11 +46,6 @@
       <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.xiaoxipeng</groupId>
-      <artifactId>yuyu-spring-boot-starter</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
       <scope>runtime</scope>
