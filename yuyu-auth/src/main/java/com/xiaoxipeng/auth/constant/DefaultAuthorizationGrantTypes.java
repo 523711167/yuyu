@@ -1,4 +1,4 @@
-package com.xiaoxipeng.auth.authtication;
+package com.xiaoxipeng.auth.constant;
 
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 

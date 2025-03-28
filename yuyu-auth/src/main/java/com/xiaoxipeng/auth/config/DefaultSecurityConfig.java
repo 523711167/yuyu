@@ -9,7 +9,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.xiaoxipeng.auth.authtication.AdminAuthenticationConverter;
 import com.xiaoxipeng.auth.authtication.AdminAuthenticationProvider;
-import com.xiaoxipeng.auth.authtication.DefaultAuthorizationGrantTypes;
+import com.xiaoxipeng.auth.constant.DefaultAuthorizationGrantTypes;
 import com.xiaoxipeng.auth.authtication.DefaultOAuth2TokenCustomizer;
 import com.xiaoxipeng.auth.util.RsaUtils;
 import com.xiaoxipeng.common.vo.R;
