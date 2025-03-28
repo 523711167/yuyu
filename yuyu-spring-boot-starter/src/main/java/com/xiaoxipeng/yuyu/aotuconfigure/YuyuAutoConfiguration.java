@@ -11,4 +11,9 @@ import org.springframework.context.annotation.Import;
         }
 )
 public class YuyuAutoConfiguration {
+
+
+        public YuyuAutoConfiguration() {
+                System.out.println("YuyuAutoConfiguration");
+        }
 }

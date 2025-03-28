@@ -13,5 +13,5 @@ public class AppConstant {
     /**
      * 不然引入的API包扫描不到
      */
-    public static final String SCAN_PACKAGE = "com.xiaoxipeng";
+    public static final String SCAN_PACKAGE_API = "com.xiaoxipeng.user";
 }
