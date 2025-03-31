@@ -4,6 +4,9 @@ package com.xiaoxipeng.yuyu.aotuconfigure;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Import;
 
+/**
+ * 不能被springboot通过包扫描扫到
+ */
 @AutoConfiguration
 @Import(
         {
