@@ -24,11 +24,23 @@
         <if test="userPageDto.username != null and userPageDto.username != ''">
             AND username = #{userPageDto.username}
         </if>
+        <if test="userPageDto.realName != null and userPageDto.realName != ''">
+            AND real_name = #{userPageDto.realName}
+        </if>
+        <if test="userPageDto.status != null">
+            AND status = #{userPageDto.status}
+        </if>
         <if test="userPageDto.phone != null and userPageDto.phone != ''">
             AND phone = #{userPageDto.phone}
         </if>
         <if test="userPageDto.address != null and userPageDto.address != ''">
             AND address LIKE CONCAT('%', #{userPageDto.address}, '%')
+        </if>
+        <if test="userPageDto.fromLastLoginTime != null">
+            AND LAST_LOGIN_TIME >= #{userPageDto.fromLastLoginTime}
+        </if>
+        <if test="userPageDto.toLastLoginTime != null">
+        AND LAST_LOGIN_TIME &lt;= #{userPageDto.toLastLoginTime}
         </if>
     </select>
 </mapper>

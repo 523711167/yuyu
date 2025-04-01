@@ -4,6 +4,8 @@ package com.xiaoxipeng.user.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 public class UserPageDto {
@@ -32,5 +34,19 @@ public class UserPageDto {
      * 地址
      */
     private String address;
+
+    /**
+     * 真实姓名
+     */
+    private String realName;
+
+    /**
+     * 状态
+     */
+    private Integer status;
+
+    private LocalDateTime fromLastLoginTime;
+
+    private LocalDateTime toLastLoginTime;
 
 }
