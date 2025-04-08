@@ -108,7 +108,6 @@
 
     <build>
         <!-- 打包后的名称 默认是 ${project.artifactId}-${project.version}.jar	-->
-        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>com.spotify</groupId>
@@ -122,8 +121,10 @@
                             <goal>build</goal>
                         </goals>
                         <configuration>
-                            <repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+                            <skip>${docker.registry.skip}</skip>
+                            <repository>${docker.registry.url}/xiaoxipeng/${project.artifactId}</repository>
                             <tag>${project.version}</tag>
+                            <dockerfile>Dockerfile</dockerfile>
                             <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                             <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
                         </configuration>
@@ -137,11 +138,15 @@
                         </goals>
                         <configuration>
                             <skip>true</skip>
-                            <repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+                            <repository>${docker.registry.url}/xiaoxipeng/${project.artifactId}</repository>
                             <tag>${project.version}</tag>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

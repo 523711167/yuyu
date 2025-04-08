@@ -2,14 +2,10 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.xiaoxipeng</groupId>
-    <artifactId>yuyu</artifactId>
-    <version>0.0.2</version>
-  </parent>
   <groupId>com.xiaoxipeng</groupId>
   <artifactId>common-util</artifactId>
   <version>0.0.2</version>
+  <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -20,32 +16,27 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>1.18.34</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
+      <version>3.14.0</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.17.0</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-annotation</artifactId>
-      <scope>provided</scope>
+      <version>3.5.9</version>
+      <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-          <finalName>${project.name}</finalName>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

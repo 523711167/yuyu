@@ -29,4 +29,47 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${docker.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${docker.registry.skip}</skip>
+                            <repository>${docker.registry.url}/xiaoxipeng/${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                            <dockerfile>Dockerfile</dockerfile>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                            <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>tag</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tag</goal>
+                        </goals>
+                        <configuration>
+                            <skip>true</skip>
+                            <repository>${docker.registry.url}/xiaoxipeng/${project.artifactId}</repository>
+                            <tag>${project.version}</tag>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

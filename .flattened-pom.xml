@@ -2,104 +2,15 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.4</version>
-    <relativePath></relativePath>
-  </parent>
   <groupId>com.xiaoxipeng</groupId>
   <artifactId>yuyu</artifactId>
   <version>0.0.2</version>
   <packaging>pom</packaging>
+  <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
-  <modules>
-    <module>yuyu-auth</module>
-    <module>yuyu-api</module>
-    <module>yuyu-gateway</module>
-    <module>yuyu-config</module>
-    <module>common-util</module>
-    <module>yuyu-service-api</module>
-    <module>yuyu-spring-boot-starter</module>
-  </modules>
-  <properties>
-    <docker.registry.url>192.168.18.124:80</docker.registry.url>
-    <java.version>17</java.version>
-    <easyexcel.version>3.3.4</easyexcel.version>
-    <maven.test.skip>true</maven.test.skip>
-    <maven.flatten.version>1.3.0</maven.flatten.version>
-    <mica.auto.version>3.1.3</mica.auto.version>
-    <maven.plugin.version>3.11.0</maven.plugin.version>
-    <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
-    <docker.plugin.version>1.4.13</docker.plugin.version>
-    <spring-cloud.version>2023.0.1</spring-cloud.version>
-    <revision>0.0.2</revision>
-    <captcha.version>1.6.2</captcha.version>
-    <poi.version>4.1.2</poi.version>
-    <docker.registry.host>http://${docker.registry.url}:2375</docker.registry.host>
-    <maven.jar.version>3.4.2</maven.jar.version>
-  </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.alibaba.cloud</groupId>
-        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-        <version>${spring-cloud-alibaba.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-bom</artifactId>
-        <version>3.5.9</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <version>1.3.0</version>
-        <executions>
-          <execution>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <updatePomFile>true</updatePomFile>
-          <flattenMode>resolveCiFriendliesOnly</flattenMode>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 </project>

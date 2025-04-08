@@ -2,15 +2,11 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.xiaoxipeng</groupId>
-    <artifactId>yuyu</artifactId>
-    <version>0.0.2</version>
-  </parent>
   <groupId>com.xiaoxipeng</groupId>
   <artifactId>yuyu-gateway</artifactId>
   <version>0.0.2</version>
-  <name>${project.artifactId}</name>
+  <name>yuyu-gateway</name>
+  <description>Parent pom providing dependency and plugin management for applications built with Maven</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -21,28 +17,38 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <version>3.3.4</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.alibaba.cloud</groupId>
       <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+      <version>2023.0.1.0</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
+      <version>4.1.2</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+      <version>4.1.2</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-config-client</artifactId>
+      <version>4.1.1</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.xiaoxipeng</groupId>
       <artifactId>common-util</artifactId>
-      <version>${revision}</version>
+      <version>0.0.2</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
-  <build />
 </project>
