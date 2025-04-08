@@ -9,3 +9,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+      # 日志格式
+      log-format: "\ntime:%(executionTime) || sql:%(sql)\n"
+      # 自定义日志类
+      logging: custom
+      custom-appender-class: com.xiaoxipeng.yuyu.aotuconfigure.config.PliuspyStdoutLogger

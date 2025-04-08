@@ -1,5 +1,5 @@
 server:
-  port: 28888
+  port: 38888
 
 spring:
   cloud:
@@ -28,9 +28,4 @@ spring:
 decorator:
   datasource:
     p6spy:
-      enable-logging: true
-      # 日志格式
-      log-format: "\ntime:%(executionTime) || sql:%(sql)\n"
-      # 自定义日志类
-      logging: custom
-      custom-appender-class: com.xiaoxipeng.yuyu.aotuconfigure.config.PliuspyStdoutLogger
+      enable-logging: false

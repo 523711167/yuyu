@@ -56,6 +56,7 @@
       <groupId>com.github.gavlyukovskiy</groupId>
       <artifactId>p6spy-spring-boot-starter</artifactId>
       <version>1.10.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.xiaoxipeng</groupId>
@@ -93,6 +94,12 @@
       <artifactId>velocity-engine-core</artifactId>
       <version>2.3</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.2</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
   <build>

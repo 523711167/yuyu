@@ -1,6 +1,7 @@
-package com.xiaoxipeng.api.config;
+package com.xiaoxipeng.yuyu.aotuconfigure.config;
 
 import lombok.extern.slf4j.Slf4j;
+
 /**
  * 使用p6spy打印sql日志
  */

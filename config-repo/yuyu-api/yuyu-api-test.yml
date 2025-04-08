@@ -1,0 +1,27 @@
+server:
+  port: 30010
+
+spring:
+  data:
+    # redis config
+    redis:
+      host: ${REDIS_ADDRESS:192.168.18.124}
+      port: 6379
+      database: 1
+  # mysql config
+  datasource:
+    url: jdbc:mysql://${MYSQL_ADDRESS:192.168.18.124:3306}/yuyu?allowPublicKeyRetrieval=true&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
+    username: user
+    password: user
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**.xml
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true

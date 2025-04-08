@@ -33,7 +33,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
             <!--    如果你引入common-util，但是本身你已经引入mybatis-plus，引入你的最新版本的annotation        -->
-            <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
