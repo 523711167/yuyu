@@ -53,12 +53,6 @@
       <version>3.37.0</version>
     </dependency>
     <dependency>
-      <groupId>com.github.gavlyukovskiy</groupId>
-      <artifactId>p6spy-spring-boot-starter</artifactId>
-      <version>1.10.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>com.xiaoxipeng</groupId>
       <artifactId>yuyu-spring-boot-starter</artifactId>
       <version>${revision}</version>
@@ -95,14 +89,41 @@
       <version>2.3</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-      <version>3.0.2</version>
-      <optional>true</optional>
-    </dependency>
   </dependencies>
   <build>
     <finalName>${project.name}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>${docker.plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+            <configuration>
+              <repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+              <tag>${project.version}</tag>
+              <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+              <googleContainerRegistryEnabled>false</googleContainerRegistryEnabled>
+            </configuration>
+          </execution>
+          <execution>
+            <id>tag</id>
+            <phase>package</phase>
+            <goals>
+              <goal>tag</goal>
+            </goals>
+            <configuration>
+              <skip>true</skip>
+              <repository>192.168.18.124:80/xiaoxipeng/${project.artifactId}</repository>
+              <tag>${project.version}</tag>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
