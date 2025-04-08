@@ -66,7 +66,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-
 	<modules>
 		<module>yuyu-auth</module>
 		<module>yuyu-api</module>
@@ -76,7 +75,6 @@
         <module>yuyu-service-api</module>
         <module>yuyu-spring-boot-starter</module>
     </modules>
-
 
 	<build>
 		<pluginManagement>
@@ -90,13 +88,6 @@
 						<!-- 打包后的名称 默认是 ${project.artifactId}-${project.version}.jar	-->
 						<finalName>${project.build.finalName}</finalName>
 					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions>
 				</plugin>
 
 				<!-- 在maven打包的生周期内执行antrun脚本			-->
