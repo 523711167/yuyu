@@ -10,6 +10,37 @@ services:
     depends_on:
       - mysql
       - redis
+  auth:
+    image: 192.168.18.124:80/xiaoxipeng/auth:0.0.1
+    container_name: xiaoxipeng-auth
+    restart: always
+    ports:
+      - "30000:30000"
+    cap_add:
+      - ALL
+    depends_on:
+      - mysql
+      - redis
+  gateway:
+    image: 192.168.18.124:80/xiaoxipeng/gateway:0.0.1
+    container_name: xiaoxipeng-gateway
+    restart: always
+    ports:
+      - "38888:38888"
+    cap_add:
+      - ALL
+    depends_on:
+      - yuyu
+      - auth
+      - config
+  config:
+    image: 192.168.18.124:80/xiaoxipeng/config:0.0.1
+    container_name: xiaoxipeng-config
+    restart: always
+    ports:
+      - "10000:10000"
+    cap_add:
+      - ALL
   redis:
     image: 192.168.18.124:80/xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis

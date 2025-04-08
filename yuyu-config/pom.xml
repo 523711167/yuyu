@@ -53,7 +53,7 @@
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>target/classes</outputDirectory>
+                            <outputDirectory>target/classes/config-repo</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
