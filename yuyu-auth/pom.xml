@@ -86,6 +86,8 @@
     </dependencies>
 
     <build>
+        <!-- 打包后的名称 默认是 ${project.artifactId}-${project.version}.jar	-->
+        <finalName>${project.name}</finalName>
         <plugins>
 
         </plugins>
