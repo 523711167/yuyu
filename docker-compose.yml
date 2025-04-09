@@ -41,7 +41,7 @@ services:
     depends_on:
       - gateway
     networks:
-      yuyu-bridge-network:
+      default:
         ipv4_address: 172.20.0.2
   redis:
     image: 192.168.18.124:80/xiaoxipeng/redis:5
@@ -101,7 +101,7 @@ services:
     cap_add:
       - ALL
     networks:
-      yuyu-bridge-network:
+      default:
         ipv4_address: 172.20.0.3
 networks:
   # docker-compose会根据的项目名称默认创建一个yuyu_default的网络
