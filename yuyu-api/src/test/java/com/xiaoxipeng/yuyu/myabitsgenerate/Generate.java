@@ -12,11 +12,11 @@ public class Generate {
                         "user")
                 .globalConfig(builder -> builder
                         .author("xiaoxipeng")
-                        .outputDir("/Users/xixipeng/IdeaProjects/yuyu/yuyu-api/src/main/java/com/xiaoxipeng/api/")
+                        .outputDir("/Users/xixipeng/IdeaProjects/yuyu/yuyu-api/src/main/java/")
                         .commentDate("yyyy-MM-dd")
                 )
                 .packageConfig(builder -> builder
-                        .parent("com.xiaoxipeng.yuyu")
+                        .parent("com.xiaoxipeng.api")
                         .entity("pojo")
                         .mapper("mapper")
                         .service("service")
@@ -24,7 +24,7 @@ public class Generate {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("user")
+                        .addInclude("article")
                         .entityBuilder()
                         .enableLombok()
                         .disableSerialVersionUID()

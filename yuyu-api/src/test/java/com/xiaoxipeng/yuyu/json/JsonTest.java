@@ -20,7 +20,7 @@ public class JsonTest {
 
 
         User user = new User();
-        user.setId(1);
+        user.setId(1L);
         user.setAddress("北京");
         user.setCreatedTime(LocalDateTime.now());
         user.setUpdatedTime(LocalDateTime.now());

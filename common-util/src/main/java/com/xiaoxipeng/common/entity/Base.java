@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class Base {
 
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 创建人
