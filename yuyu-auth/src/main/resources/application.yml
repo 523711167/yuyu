@@ -6,13 +6,13 @@ spring:
     name: yuyu-auth
   cloud:
     nacos:
-      server-addr: ${NACOS_ADDRESS:172.20.0.3:8848}
+      server-addr: ${NACOS_ADDRESS:172.20.1.0:8848}
     config:
       name: ${spring.application.name}
       profile: ${spring.profiles.active}
   config:
-    import: configserver:${CONFIG_SERVER_ADDRESS:http://172.20.0.2:10000}
+    import: configserver:${CONFIG_SERVER_ADDRESS:http://172.20.1.1:10000}
 
 logging:
-  config: ${CONFIG_SERVER_ADDRESS:http://172.20.0.2:10000}/${spring.application.name}/${spring.profiles.active}/logback-spring.xml?useDefaultLabel=true&resolvePlaceholders=false
+  config: ${CONFIG_SERVER_ADDRESS:http://172.20.1.1:10000}/${spring.application.name}/${spring.profiles.active}/logback-spring.xml?useDefaultLabel=true&resolvePlaceholders=false
 
