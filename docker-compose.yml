@@ -1,7 +1,7 @@
 services:
   api:
     image: 192.168.18.124:80/xiaoxipeng/yuyu-api:0.0.2
-    container_name: xiaoxipeng-yuyu
+    container_name: xiaoxipeng-api
     restart: always
     ports:
       - "30010:30010"
@@ -40,6 +40,9 @@ services:
       - ALL
     depends_on:
       - gateway
+    networks:
+      yuyu-bridge-network:
+        ipv4_address: 172.20.0.2
   redis:
     image: 192.168.18.124:80/xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis
@@ -97,3 +100,13 @@ services:
       - "9848:9848"
     cap_add:
       - ALL
+    networks:
+      yuyu-bridge-network:
+        ipv4_address: 172.20.0.3
+networks:
+  yuyu-bridge-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1

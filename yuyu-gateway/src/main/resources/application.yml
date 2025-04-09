@@ -6,17 +6,9 @@ spring:
     name: yuyu-gateway
   cloud:
     nacos:
-      server-addr: ${NACOS_ADDRESS:localhost:8848}
-    config:
-      name: ${spring.application.name}
-      profile: ${spring.profiles.active}
-      uri: ${CONFIG_SERVER_ADDRESS:http://localhost:10000}
+      server-addr: ${NACOS_ADDRESS:172.20.0.3:8848}
   config:
-    import: configserver:${CONFIG_SERVER_ADDRESS:http://localhost:10000}
-
-
-
-
+    import: configserver:${CONFIG_SERVER_ADDRESS:http://172.20.0.2:10000}
 
 logging:
-  config: ${CONFIG_SERVER_ADDRESS:http://localhost:10000}/${spring.application.name}/${spring.profiles.active}/logback-spring.xml?useDefaultLabel=true&resolvePlaceholders=false
+  config: ${CONFIG_SERVER_ADDRESS:http://172.20.0.2:10000}/${spring.application.name}/${spring.profiles.active}/logback-spring.xml?useDefaultLabel=true&resolvePlaceholders=false
