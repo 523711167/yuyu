@@ -12,4 +12,4 @@ WORKDIR /xiaoxipeng/config
 ADD ./target/${JAR_NAME}.jar ./yuyu-config.jar
 
 # 定义容器启动时执行的命令
-CMD ["java", "-jar","yuyu-config.jar", "--spring.profiles.active=test"]
+CMD ["java", "-jar","yuyu-config.jar" ]
