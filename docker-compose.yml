@@ -106,9 +106,6 @@ services:
 networks:
   # docker-compose会根据的项目名称默认创建一个yuyu_default的网络
   default:
-    external:
-      name: yuyu-bridge-network
-  yuyu-bridge-network:
     driver: bridge
     ipam:
       config:
