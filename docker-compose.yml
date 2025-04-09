@@ -31,7 +31,7 @@ services:
       - mysql
       - redis
   config:
-    image: 192.168.18.124:80/xiaoxipeng/config:0.0.2
+    image: 192.168.18.124:80/xiaoxipeng/yuyu-config:0.0.2
     container_name: xiaoxipeng-config
     restart: always
     ports:
