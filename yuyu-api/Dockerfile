@@ -9,7 +9,7 @@ RUN mkdir -p /xiaoxipeng/api
 # 设置容器内的工作目录，后续COPY RUN 命令的target目录都是/usr/src/app
 WORKDIR /xiaoxipeng/api
 
-ADD ./target/${JAR_NAME} ./yuyu-api.jar
+ADD ./target/${JAR_NAME}.jar ./yuyu-api.jar
 
 # 定义容器启动时执行的命令
 CMD ["java", "-jar","yuyu-api.jar", "--spring.profiles.active=test"]
