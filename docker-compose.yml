@@ -94,8 +94,9 @@ services:
       - /var/nacos/:/home/nacos/
     environment:
       - MODE=standalone
-      - MYSQL_SERVICE_USER=admin
-      - MYSQL_SERVICE_PASSWORD=admin123
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
     ports:
       - "8848:8848"
       - "9848:9848"
