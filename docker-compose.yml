@@ -90,9 +90,10 @@ services:
     container_name: xiaoxipeng-nacos
     restart: always
     volumes:
+      # 包含nacos日志
       - /var/nacos/:/home/nacos/
     environment:
-      - MODE=true
+      - MODE=standalone
       - MYSQL_SERVICE_USER=admin
       - MYSQL_SERVICE_PASSWORD=admin123
     ports:
