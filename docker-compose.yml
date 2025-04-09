@@ -1,17 +1,18 @@
 services:
-  yuyu:
-    image: 192.168.18.124:80/xiaoxipeng/yuyu:0.0.1
+  api:
+    image: 192.168.18.124:80/xiaoxipeng/yuyu-api:0.0.2
     container_name: xiaoxipeng-yuyu
     restart: always
     ports:
-      - "8080:8080"
+      - "30010:30010"
     cap_add:
       - ALL
     depends_on:
       - mysql
       - redis
+      - gateway
   auth:
-    image: 192.168.18.124:80/xiaoxipeng/auth:0.0.1
+    image: 192.168.18.124:80/xiaoxipeng/yuyu-auth:0.0.2
     container_name: xiaoxipeng-auth
     restart: always
     ports:
@@ -22,7 +23,7 @@ services:
       - mysql
       - redis
   gateway:
-    image: 192.168.18.124:80/xiaoxipeng/gateway:0.0.1
+    image: 192.168.18.124:80/xiaoxipeng/yuyu-gateway:0.0.2
     container_name: xiaoxipeng-gateway
     restart: always
     ports:
@@ -30,9 +31,8 @@ services:
     cap_add:
       - ALL
     depends_on:
-      - yuyu
-      - auth
-      - config
+      - mysql
+      - redis
   config:
     image: 192.168.18.124:80/xiaoxipeng/config:0.0.1
     container_name: xiaoxipeng-config
@@ -41,6 +41,8 @@ services:
       - "10000:10000"
     cap_add:
       - ALL
+    depends_on:
+      - gateway
   redis:
     image: 192.168.18.124:80/xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis
@@ -82,7 +84,7 @@ services:
     cap_add:
       - ALL
     depends_on:
-      - yuyu
+      - api
   nacos:
     image: 192.168.18.124:80/xiaoxipeng/nacos:2.4.3
     container_name: xiaoxipeng-nacos
