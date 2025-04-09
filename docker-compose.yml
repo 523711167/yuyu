@@ -93,7 +93,7 @@ services:
       - MYSQL_SERVICE_USER=admin
       - MYSQL_SERVICE_PASSWORD=admin123
     ports:
-      - "8848":"8848"
-      - "9848":"9848"
+      - "8848:8848"
+      - "9848:9848"
     cap_add:
       - ALL
