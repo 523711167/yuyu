@@ -83,13 +83,12 @@
             <artifactId>spring-retry</artifactId>
         </dependency>
 
+        <!--  解析Html文档      -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.10.2</version> <!-- 请检查最新版本 -->
         </dependency>
-
-
 
         <dependency>
             <groupId>org.mockito</groupId>
