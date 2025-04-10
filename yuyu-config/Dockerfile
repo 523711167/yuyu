@@ -4,6 +4,12 @@ ARG JAR_NAME
 # 设置维护者信息
 LABEL maintainer="xiaoxipeng 523711167@qq.com"
 
+# 设置环境变量
+ENV NACOS_ADDRESS=172.20.1.0 \
+    CONFIG_SERVER_ADDRESS=172.20.1.1 \
+    MYSQL_ADDRESS=172.20.1.2 \
+    REDIS_ADDRESS=172.20.1.3
+
 RUN mkdir -p /xiaoxipeng/config
 
 # 设置容器内的工作目录，后续COPY RUN 命令的target目录都是/usr/src/app
