@@ -7,6 +7,7 @@ spring:
     redis:
       host: ${REDIS_ADDRESS:192.168.18.124}
       port: 6379
+      password: xiaoxipeng
       database: 1
   # mysql config
   datasource:
