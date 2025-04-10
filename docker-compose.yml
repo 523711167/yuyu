@@ -30,6 +30,7 @@ services:
     depends_on:
       - mysql
       - redis
+      - nacos
   config:
     image: 192.168.18.124:80/xiaoxipeng/yuyu-config:0.0.2
     container_name: xiaoxipeng-config
@@ -38,8 +39,6 @@ services:
       - "10000:10000"
     cap_add:
       - ALL
-    depends_on:
-      - gateway
     networks:
       default:
         ipv4_address: 172.20.1.1
@@ -83,8 +82,6 @@ services:
       - "8081:80"
     cap_add:
       - ALL
-    depends_on:
-      - api
   nacos:
     image: 192.168.18.124:80/xiaoxipeng/nacos:2.4.3
     container_name: xiaoxipeng-nacos
