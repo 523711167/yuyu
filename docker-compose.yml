@@ -9,6 +9,8 @@ services:
       - ALL
     depends_on:
       - gateway
+      - config
+      - nacos
   auth:
     image: 192.168.18.124:80/xiaoxipeng/yuyu-auth:0.0.2
     container_name: xiaoxipeng-auth
@@ -19,6 +21,8 @@ services:
       - ALL
     depends_on:
       - gateway
+      - config
+      - nacos
   gateway:
     image: 192.168.18.124:80/xiaoxipeng/yuyu-gateway:0.0.2
     container_name: xiaoxipeng-gateway
@@ -31,6 +35,7 @@ services:
       - mysql
       - redis
       - nacos
+      - config
   config:
     image: 192.168.18.124:80/xiaoxipeng/yuyu-config:0.0.2
     container_name: xiaoxipeng-config
@@ -42,6 +47,8 @@ services:
     networks:
       default:
         ipv4_address: 172.20.1.1
+    depends_on:
+      - nacos
   redis:
     image: 192.168.18.124:80/xiaoxipeng/redis:5
     container_name: xiaoxipeng-redis
@@ -86,9 +93,9 @@ services:
     image: 192.168.18.124:80/xiaoxipeng/nacos:2.4.3
     container_name: xiaoxipeng-nacos
     restart: always
-    volumes:
+    #volumes:
       # 包含nacos日志
-      - /var/nacos/:/home/nacos/
+      #- /var/nacos/:/home/nacos/
     environment:
       - MODE=standalone
       - NACOS_AUTH_IDENTITY_KEY=serverIdentity
