@@ -78,6 +78,7 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- spring重试机制       -->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
