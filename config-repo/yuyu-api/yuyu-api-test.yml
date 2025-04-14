@@ -1,5 +1,5 @@
 server:
-  port: 30010
+  port: 20010
 
 spring:
   data:
