@@ -7,16 +7,22 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>yuyu-user-api</artifactId>
+    <artifactId>yuyu-dict-api</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
-    <description>用户相关API调用</description>
+    <description>字典相关API调用</description>
+
 
     <dependencies>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
         </dependency>
-    </dependencies>
 
+        <!-- Spring Boot Starter Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+    </dependencies>
 </project>

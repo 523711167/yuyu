@@ -24,7 +24,7 @@ public class Generate {
                         .xml("mapper.xml")
                 )
                 .strategyConfig(builder -> builder
-                        .addInclude("article")
+                        .addInclude("dict_data", "dict_group", "dict_type")
                         .entityBuilder()
                         .enableLombok()
                         .disableSerialVersionUID()

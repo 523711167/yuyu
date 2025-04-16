@@ -14,6 +14,7 @@
     <description>yuyu 微服务API集合</description>
     <modules>
         <module>yuyu-user-api</module>
+        <module>yuyu-dict-api</module>
     </modules>
 
     <dependencies>
